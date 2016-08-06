@@ -1,0 +1,20 @@
+{
+  "name": "ninja-presentation",
+  "version": "0.3.0",
+  "homepage": "http://viniciusalmeida.github.io/ninja-presentation",
+  "description": "Do not be fooled. You do not have to be a ninja to use this toolkit for slides presentation!",
+  "main": "src/ninja-presentation.html",
+  "keywords": [
+    "slides", "presentation", "web", "components", "custom", "elements", "web-components"
+  ],
+  "authors": [
+    "Vinícius Almeida"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*", "bower_components", "skins", "README.md", "index.html"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#~0.3.4"
+  }
+}

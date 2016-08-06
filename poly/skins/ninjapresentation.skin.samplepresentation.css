@@ -1,0 +1,23 @@
+/**
+ * Sample Presentation - Skin for ninjaPresentation
+ * Used on sample presentation of ninjaPresentation.
+ */
+
+small {
+    font-size: 0.5em;
+}
+code {
+    color: #FFFFFF;
+    background: #FFFFFF;
+    margin-left: 10px;
+    font-family: 'Share Tech Mono'
+}
+.fork {
+	color: white;
+}
+.fork h1 {
+	text-shadow: 5px 5px 0 #666;
+}
+slide { -webkit-transform: translateX(2000px); display: none; height: 100%;}
+slide.fadeInRightBig{display:block}
+slide.fadeInLeftBig{display:block}

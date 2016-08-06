@@ -1,0 +1,61 @@
+<polymer-element name='ninja-presentation' attributes='background font align color'>
+    <template>
+        <div>
+            <content></content>
+        </div>
+        <style>
+            div {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                color: {{color}};
+                overflow: hidden;
+                background: {{background}};
+                font-family: "{{font}}";
+                list-style: inside;
+                text-align: {{align}};
+            }
+        </style>
+    </template>
+    <script src="ninja-presentation.js"></script>
+</polymer-element>
+
+<polymer-element name='ninja-slide' attributes='background font color align'>
+    <template>
+        <div class='container'>
+            <div class='aligner'>
+                <content></content>
+            <div>
+        </div>
+        <style>
+            .container {
+                background: {{background}};
+                <template if="{{background == 'nothing'}}">
+                    background: none;
+                </template>
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 80%;
+                height: 100%;
+                text-align: {{align}};
+                font-family: "{{font}}";
+                font-size: 3.5em;
+                color: {{color}};
+                padding: 0 10%;
+                /* -- flex-boxes -- */
+                display: -webkit-flex;
+                display: flex;
+                -webkit-flex-align: center;
+                -webkit-align-items: center;
+                align-items: center;
+            }
+            .container .aligner {
+                width: 100%;
+            }
+        </style>
+    </template>
+    <script src="ninja-slide.js"></script>
+</polymer-element>
