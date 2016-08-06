@@ -1,0 +1,163 @@
+/* 
+Product List Page
+================================================== */
+
+.product-list {
+	background: #f9fafb;
+	.page-title div {
+		border-bottom: #dcdcdc solid 1px;
+		margin-bottom: 32px;
+	}
+	& > ul {
+		margin: 0;
+		padding: 0;
+		& > li {
+			border-bottom: #e6ecf4 solid 1px;
+			border-top: #ffffff solid 1px;
+			padding: 32px 0;
+			&:first-child {
+				border-top: none;
+			}
+			.wrapper {
+				div {
+					padding-bottom: 0;
+					h3 {
+						color: #231f20;
+						font-size: 18px;
+						font-family: 'neue-bold', 'Open Sans', Helvetica, sans-serif;
+					}
+					p, li {
+						color: #939598;
+						font-size: 16px;
+						line-height: 20px;
+						margin-bottom: 0;
+					}
+					p.helper-text {
+						font-size: 13px;
+						strong {
+							color: #333;
+						}
+					}
+					ul {
+						padding-left: 20px;
+						margin: 0.75em 0;
+						li {
+							list-style: disc;
+						}
+					}
+					a {
+						font-size: 16px;
+						&.button {
+							padding: 8px 1.5em 8px;
+							margin-top: 1em;
+						}
+					}
+					select {
+						margin-bottom: 12px;
+					}
+					div {
+						margin-top: 1em;
+						&.stacked {
+							a {
+								display: block;
+								width: 135px;
+								margin-top: 0;
+							}
+						}
+					}
+				}
+			}
+		}
+		&.deposit-slips {
+			& > li {
+				padding-bottom: 0;
+				.wrapper div {
+					margin-bottom: -10px;
+				}
+			}
+		}
+	}
+}
+
+.al-city-income-tax {
+	h4 {
+		color: #333;
+		padding-bottom: 0;
+	}
+	ul {
+		padding: 0 !important;
+		margin-bottom: 20px;
+		li {
+			list-style: none !important;
+			padding-left: 0;
+		}
+	}
+}
+
+/* 
+Drawer
+================================================== */
+.drawer {
+	position: fixed;
+	top: 0;
+	right: 0;
+	z-index: 2;
+  	padding: 40px 60px;
+	font-size: 11px;
+	margin-right: -560px;
+	width: 540px;
+	height: 100%;
+	background-color: #e3eaf2;
+	border-left: #bfd0e4 solid 1px;
+	zoom: 1;
+	overflow: auto;
+	& > div {
+		position: relative;
+		.close {
+			position: absolute;
+			top: -18px;
+			right: 0px;
+			font-size: 32px;
+			line-height: 1em;
+			color: #919296;
+		}
+		ul {
+			padding-left: 1.5em;
+			li {
+				list-style: disc;
+			}
+		}
+	}
+	h3, h4 {
+		font-family: 'neue-bold', 'Open Sans', Helvetica, sans-serif;
+	}
+	h3 {
+		color: #21201e;
+		padding-bottom: 3px;
+		margin-top: 16px;
+		margin-bottom: 7px;
+		border-bottom: #fff solid 1px;
+		font-size: 16px;
+	}
+	h4 {
+		color: #58595b;
+		font-size: 14px;
+		margin-top: 20px;
+		margin-bottom: 4px
+	}
+	ul {
+		margin-top: 0
+	}
+	a.button {
+		font-size: 1em;
+    	margin-top: 20px;
+	}
+	select {
+		display: block;
+		margin-bottom: 8px;
+		font-size: 12px;
+	}
+	&.open {
+		margin-right: 0;
+	}
+}	

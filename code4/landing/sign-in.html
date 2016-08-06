@@ -1,0 +1,179 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Checks, Business Cards &amp; More</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="../css/bootstrap.css">
+        <link rel="stylesheet" href="../css/style.css">
+        <!--[if lte IE 8]>
+            <link rel="stylesheet" href="../css/all-old-ie.css">
+        <![endif]-->
+    </head>
+    <body class="account">
+        
+
+        <div class="header">
+            <div class="primary-nav">
+                <h1><a href="sell-new.html">QuickBooks Checks &amp; Supplies</a></h1>
+                <ul>
+                    <li class="dropdown">
+                        <button class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">Checks</button>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                            <li role="presentation">
+                                <a role="menuitem" tabindex="-1" href="checks-voucher.html">Voucher Checks</a>
+                            </li>
+                            <li role="presentation">
+                                <a role="menuitem" tabindex="-1" href="checks-standard.html">Standard Checks</a>
+                            </li>
+                            <li role="presentation">
+                                <a role="menuitem" tabindex="-1" href="checks-wallet.html">Wallet Checks</a>
+                            </li>
+                        </ul>
+                    </li><li><a href="envelopes.html">Envelopes</a></li><li><a href="deposit-slips.html">Deposit&nbsp;Slips</a></li><li><a href="tax-forms.html">Tax&nbsp;Forms</a></li>
+                </ul>
+            </div>
+            <div class="secondary-nav">
+                <div>
+                    <a href="tel:18665703842">(866) 570-3842</a>
+                    <a href="#" class="chat">Chat</a>
+                </div>
+                <ul>
+                    <li><a href="#" data-toggle="modal" data-target="#trackOrderSignedOut">Track an Order</a></li>
+                    
+                    <!-- 
+                    Signed In User Track Order Modal
+                    <li><a href="#" data-toggle="modal" data-target="#trackOrderSignedIn">Track an Order</a></li>
+                    -->
+                    
+                    <li><a href="../checkout/shopping-cart.html">Cart</a></li>
+                    <li><a href="#" class="sign-in-button">Sign In</a></li>
+                </ul>
+            </div>
+        </div>
+
+
+        <div class="wrapper oneCol page-title">
+            <div>
+                <div class="actions">
+                    <h2>Sign in</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="wrapper oneCol">
+            <div>
+
+                <form action="" method="">
+                    <ul>
+                        <li>
+                            <label for="emailAddress">Email address<input type="email" id="emailAddress" class="form-control"/></label>
+                        </li>
+                        <li>
+                            <label for="password">Password<input type="password" id="password" class="form-control"/></label>
+                        </li>
+                        <li class="actions"><button type="button" class="button">Sign In</button></li>
+                        <li class="helper-text">
+                            <p><a href="create-account.html">Create Account</a></p>
+                            <p><a href="forgot-credentials.html">I forgot my User ID or password</a></p>
+                        </li>
+                    </ul>
+                </form>                
+
+            </div>
+        </div>
+
+
+
+        <div class="modal fade" id="trackOrderSignedOut" tabindex="-1" role="dialog" aria-labelledby="trackOrderSignedOut" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h3>Track an order</h3>
+                        <p>Find your order by filling out one of the forms below. If you ordered while signed in, the information will be in your account. <a href="#">Sign in</a> to find your order.</p>
+                        <div class="search-methods">
+                            <div>
+                                <h4>Search by payment info (all fields are required)</h4>
+                                <form>
+                                    <ul>
+                                        <li>
+                                            <label for="lastName">Last Name:<input type="text" id="lastName" class="form-control"></label>
+                                        </li>
+                                        <li>
+                                            <label for="phone">Phone:<input type="text" id="phone" class="form-control"></label>
+                                        </li>
+                                        <li>
+                                            <label for="fourDigits">Last 4 Digits of Credit Card:<input type="text" id="fourDigits" class="form-control"></label>
+                                        </li>
+                                        <li class="actions"><button type="button" id="getStatusByPayment" class="button">Get Status</button></li>
+                                    </ul>
+                                </form>
+                            </div>
+                            <div>
+                                <h4>Search by order info (all fields are required)</h4>
+                                <form>
+                                    <ul>
+                                        <li>
+                                            <label for="orderNumber">Order Number:<input type="text" id="orderNumber" class="form-control"></label>
+                                            <p class="helper-text">(e.g. QST100000000001)</p>
+                                        </li>
+                                        <li>
+                                            <label for="zipCode">Zip Code:<input type="text" id="zipCode" class="form-control"></label>
+                                        </li>
+                                        <li class="actions"><button type="button" id="getStatusByOrder" class="button">Get Status</button></li>
+                                    </ul>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+
+
+
+        <div class="modal fade" id="trackOrderSignedIn" tabindex="-1" role="dialog" aria-labelledby="trackOrderSignedIn" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h3>Can't find an order?</h3>
+                        <p>Orders placed when signed out will not show up in your order history. Pleas enter at least one field below to look up your order.</p>
+                        <p>If you have multiple accounts, the order may have been placed under a different account. <a href="">Sign in with another account</a>.</p>
+                        <form>
+                            <ul>
+                                <li>
+                                    <label for="orderNumberSignedIn">Order Number:<input type="text" id="orderNumberSignedIn" class="form-control"></label>
+                                </li>
+                                <li>
+                                    <label for="emailAddress">Email address:<input type="text" id="emailAddress" class="form-control"></label>
+                                </li>
+                                <li>
+                                    <label for="phoneSignedIn">Phone number:<input type="text" id="phoneSignedIn" class="form-control"></label>
+                                </li>
+                                <li>
+                                    <label for="bankAccount">Bank account number:<input type="text" id="bankAccount" class="form-control"></label>
+                                </li>
+                                <li class="actions"><button type="button" id="lookupOrder" class="button">Lookup Order</button></li>
+                            </ul>
+                        </form>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+
+
+
+        <script src="../js/jquery-1.11.1.js"></script>  
+        <script src="../js/respond.js"></script>
+        <script src="../js/bootstrap.min.js"></script>
+        <script src="../js/bootstrap-modal-popover.js"></script>
+        <script src="../js/main.js"></script>
+
+
+    </body>
+</html>

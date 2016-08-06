@@ -1,0 +1,83 @@
+/*
+Bootstrap Page Structure Updates
+================================================================== */
+.bootstrap-page {
+  .page-title {
+  	margin-top: 40px;
+  	margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: #dcdcdc solid 4px;
+    h2, p {
+    	margin-bottom: 0;
+    }
+  }
+}
+
+
+/*
+Order History Page
+================================================================== */
+.filter {
+	margin-top: 30px;
+	margin-bottom: 30px;
+	p {
+		margin-bottom: 10px;
+	}
+}
+.filter-orders {
+	input[type=text] {
+		width: 360px;
+	}
+	.button {
+		line-height: 0.75;
+    	padding: 10px 1.35em 11px;
+	}
+}
+
+.order-history {
+
+}
+.dont-see-order {
+	margin-top: 12px;
+}
+.order {
+	border: #ddd solid 1px;
+	margin-bottom: 40px;
+}
+.order-header, .order-body {
+	padding: 20px;
+}
+.order-header {
+	background: #efefef;
+	border-bottom: #ddd solid 1px;
+}
+.order-body > .row {
+	margin-bottom: 40px;
+}
+.order-body > .row:last-of-type {
+	margin-bottom: 0;
+}
+
+
+
+
+/*
+Pagination
+================================================================== */
+.pagination {
+	text-align: center;
+	margin: 0;
+	padding: 0;
+	li {
+		list-style: none;
+		display: inline;
+		margin: 0 6px;
+	}
+}
+
+
+
+
+
+
+

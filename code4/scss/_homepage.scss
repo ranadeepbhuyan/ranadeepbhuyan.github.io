@@ -1,0 +1,158 @@
+/* 
+Home Page
+================================================== */
+
+.home {
+	.page-title {
+		background: url(../images/bg_homepage.jpg) no-repeat right top;
+		background-size: 100% auto;
+		padding: 2em 2em 2%;
+		width: 100%;
+		min-width: 48em;
+		&:after {
+			display: table;
+			content: "";
+			clear: both;
+		}
+		h1 {
+			font-weight: normal;
+			line-height: 37px;
+			color: #59595c;
+			font-size: 27px;
+			font-family: 'neue-roman', 'Open Sans', Helvetica, sans-serif;
+			strong {
+				display: block;
+				font-size: 29px;
+				line-height: 33px;
+				font-weight: normal;
+				font-family: 'neue-bold', 'Open Sans', Helvetica, sans-serif;
+			}
+		}
+		p {
+			display: inline-block;
+			line-height: 1.2em;
+			width: 260px;
+			color: #59595c;
+			font-family: 'neue-roman', 'Open Sans', Helvetica, sans-serif;
+		}
+		a {
+			vertical-align: top;
+		}
+	}	
+	.check-promo {
+		text-align: right;
+		width: 100%;
+		margin-top: 1em;
+		p {
+			display: block;
+			padding-right: 0;
+			width: auto;
+			color: #59595c;
+			text-align: center;
+		}
+	}
+	.sign-in {
+		background: #f3f5f8;
+		text-align: center;
+		padding: 2.5em 0;
+		position: relative;
+		h2 {
+			margin: 0;
+			color: #231f20;
+			font-family: 'neue-roman', 'Open Sans', Helvetica, sans-serif;
+		}
+		p {
+			color: #59595c;
+		}
+	}
+	&.revised {
+		background: #f3f5f8;
+		.actions {
+			text-align: center;
+		}
+		.sidebar {
+			position: fixed;
+			width: 380px;
+			height: 100%;
+			left: 0;
+			z-index:2;
+			padding: 24px;
+			background: #f3f5f8;
+			border-right: #fff solid 1px;
+			.page-title {
+				background: none;
+				padding: 0 0 20px;
+				min-width: inherit;
+				border-bottom: #fff solid 1px;
+				h1 {
+					margin-bottom: 70px;
+					strong {
+						display: inline;
+						font-size: 34px;
+					}
+				}
+				p {
+					font-size: 25px;
+					line-height: 29px;
+					margin-bottom: 20px;
+					color: #666;
+				}
+				.actions {
+					border: none;
+				}
+			}
+			.sign-in {
+				text-align: left;
+				padding: 20px 0 0;
+				border-top: #ddd solid 1px;
+				h2 {
+					font-size: 27px;
+					color: #666;
+					line-height: 31px;
+				}
+				p {
+					color: #999;
+				}
+			}
+		}
+		.promo {
+			z-index:1;
+			background: #f3f5f8;
+			position: fixed;
+			margin-left: 380px;
+			top: -50%;
+			left: -50%;
+			width: 200%;
+			height: 200%;
+			& > img {
+				z-index: 1;
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				margin: auto;
+				min-width: 50%;
+				min-height: 50%;
+			}
+			.check-promo{
+				position: absolute;
+				margin-top: 0;
+				text-align: left;
+				top: 30%;
+				width: 12%;
+				left: 42%;
+				z-index: 2;
+				img {
+					width: 100%;
+				}
+				p {
+					text-align: left;
+					line-height: 1.4;
+				}
+			}
+		}
+	}
+}
+
+

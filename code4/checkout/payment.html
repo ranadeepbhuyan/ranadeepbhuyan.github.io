@@ -1,0 +1,253 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Checks, Business Cards &amp; More</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="../css/bootstrap.css">
+        <link rel="stylesheet" href="../css/style.css">
+        <!--[if lte IE 8]>
+            <link rel="stylesheet" href="../css/all-old-ie.css">
+        <![endif]-->
+    </head>
+    <body class="checkout">
+
+        <div class="header">
+            <div class="primary-nav">
+                <h1>Checkout</h1>
+            </div>
+            <div class="secondary-nav">
+                <div>`
+                    <a href="tel:18665703842">(866) 570-3842</a>
+                    <a href="#" class="chat">Chat</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="full-header">
+            <div class="wrapper oneCol progress">
+                <div>
+                    <img src="../images/CheckoutProgress_payment.png" />
+                </div>
+            </div>
+        </div>
+
+        <div id="updateMessaging" class="wrapper oneCol">
+            <div>
+                <div class="update-messaging error">
+                    <h3>There was a problem with your credit card.</h3>
+                    <p>Please double-check that you’ve entered your credit card information correctly and submit your order again.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="wrapper oneCol page-title">
+            <div>
+                <div class="actions">
+                    <h2>Payment Information</h2>
+                    <div>
+                        <a href="review.html" class="button">Next: Review Your Order</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="wrapper sidebar">
+            <div class="two-thirds">
+                
+                <div class="shipping-billing-options">
+                    <ul>
+                        <li>                            
+                            <input type="radio" name="payment-method" id="credit-card" checked />
+                            <label for="credit-card" class="credit-card"><em>Use a credit card</em></label>
+                            <div class="requires-check show">
+                                <ul class="stacked-field">
+                                    <li>
+                                        <label for="card-number">
+                                            Card Number
+                                            <input type="text" id="card-number" />
+                                        </label>
+                                    </li>
+                                    <li class="expiration-date">
+                                        <label for="expiration-date">Expiration Date</label>
+                                        <select class="button secondary form-control" id="month" placeholder="MM">
+                                            <option>01</option>
+                                            <option>02</option>
+                                            <option>03</option>
+                                            <option>04</option>
+                                            <option>05</option>
+                                            <option>06</option>
+                                            <option>07</option>
+                                            <option>08</option>
+                                            <option>09</option>
+                                            <option>10</option>
+                                            <option>11</option>
+                                            <option>12</option>                                                
+                                        </select>
+                                        <select class="button secondary form-control" id="year" placeholder="YYYY">
+                                            <option>2014</option>
+                                            <option>2015</option>
+                                            <option>2016</option>
+                                            <option>2018</option>
+                                            <option>2019</option>
+                                            <option>2020</option>
+                                        </select>
+                                    </li>
+                                    <li class="security-code">
+                                        <label for="security-code">
+                                            Security Code
+                                            <div class="tooltip">
+                                                <button href="#securityCode" type="button" role="button" class="open-popover" data-toggle="modal-popover" data-placement="bottom">&#63;</button>
+                                            </div>
+                                            <input type="text" id="security-code" />
+                                        </label>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="check-payment-option">                            
+                            <input type="radio" name="payment-method" id="bank-account" />
+                            <label for="bank-account" class="bank-account"><em>Use bank account</em></label>
+                            <div class="requires-check">
+                                <select class="button secondary form-control">
+                                    <option>Bank Name 1234</option>
+                                    <option>Bank Name 1234</option>
+                                    <option>Bank Name 1234</option>
+                                </select>
+                                <p>Important: by clicking “Place order”, I hereby authorize Intuit to deduct from my bank account indicated above for products and or services below. I understand that authorization is to remain in full force and effect until Intuit has received notification from me in such time and mannor as to afford Intuit and Financial Institution a reasonable oppertunity to act on it. To cancel a subscription, please call 1-800-4 intuit or to My Account. Please print for your records.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div><!-- End shipping-billing-options -->
+
+                <div class="billing-address">
+                    <h3 class="section-header">Billing Address</h3>
+                    <address>
+                        Public Barber Shop <small><a href="#" data-toggle="modal" data-target="#editBilling">Edit</a></small><br/>
+                        1234 Main St.<br/>
+                        San Francisco, CA 94107<br/>
+                        (415) 555-1212<br/>
+                        tom@gmail.com
+                    </address>
+
+                    <div id="editBilling">
+                        <small>* Required Fields</small>
+                        <form action="" method="post">
+                            <div class="oneCol">
+                                <div>
+                                    <ul>
+                                        <li>
+                                            <label for="billingOnlyFirstName" class="first-name">First Name *
+                                                <input type="text" id="billingOnlyFirstName" class="first-name" />
+                                            </label>
+                                            <label for="billingOnlyLastName" class="last-name">Last Name *
+                                                <input type="text" id="billingOnlyLastName" class="last-name" />
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label for="billingOnlyBusinessName">Business Name
+                                                <input type="text" id="billingOnlyBusinessName" class="business-name" />
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label for="billingOnlyAddressOne">Address 1 * <small>we cannot ship to p.o. boxes</small>
+                                                <input type="text" id="billingOnlyAddressOne" class="address-name" placeholder="1234 Main St" />
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label for="billingOnlyAddressTwo">Address 2
+                                                <input type="text" id="billingOnlyAddressTwo" class="address-street" placeholder="Ste 123" />
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label for="billingOnlyCity" class="city">City *
+                                                <input type="text" id="billingOnlyCity" placeholder="Anytown" />
+                                            </label>
+                                            <label for="billingOnlyState" class="state">State *
+                                                <input type="text" id="billingOnlyState" placeholder="CA" />
+                                            </label>
+                                            <label for="billingOnlyZip" class="zip">Zip Code *
+                                                <input type="text" id="billingOnlyZip" placeholder="12345" />
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label for="billingOnlyPhone">Phone Number *
+                                                <input type="text" id="billingOnlyPhone" class="address-phone" placeholder="(555) 555 - 1234" />
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label for="billingOnlyEmail">Email Address *
+                                                <input type="email" id="billingOnlyEmail" class="email" />
+                                            </label>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div><!-- End .twoCol -->
+                        </form>
+                    </div>
+                </div><!-- End billing-address -->
+
+            </div>
+            <div class="one-third">
+                <div class="panel">
+                    <h3><strong>Your order</strong></h3>
+                    <dl class="pricing-list">
+                        <dt>3 items</dt>
+                        <dd>$133.00</dd>
+                        <dt>Shipping</dt>
+                        <dd>$40.00</dd>
+                        <dt>Taxes</dt>
+                        <dd>$30.00</dd>
+                        <dt><strong>Total</strong></dt>
+                        <dd><strong>$240.00</strong></dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+
+    	<div class="bananaTrowser">
+            <a href="review.html" class="button">Next: Review Your Order</a>
+            <a href="shipping.html" class="tertiary">Back to Shipping Information</a>
+    	</div>
+
+
+        <!-- Security code popup -->
+        <div id="securityCode" class="popover">
+            <div class="arrow"></div>
+            <div class="popover-content">
+                <img src="../images/card-security-code.png" alt="Credit Card Security Code" />
+            </div>
+        </div>
+
+        <div class="modal fade" id="remove-from-order" tabindex="-1" role="dialog" aria-labelledby="removeFromOrder" aria-hidden="true">
+            <div class="modal-dialog modal-md">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <p>Are you sure you want to remove this discount code from your order?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="button secondary" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="button">Remove</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+
+
+        <script src="../js/jquery-1.11.1.js"></script>  
+        <script src="../js/respond.js"></script>
+        <script src="../js/bootstrap.min.js"></script>
+        <script src="../js/bootstrap-modal-popover.js"></script>
+        <script src="../js/main.js"></script>
+
+        <script>
+            $(function() {
+                $("#card-number").focus();
+            });
+        </script>
+
+    </body>
+</html>

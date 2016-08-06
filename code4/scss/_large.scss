@@ -1,0 +1,58 @@
+@media screen and ( min-width: $break-large ) {
+
+	/*
+	Grids
+	======================================================= */
+	.wrapper {
+		width: ($break-large - 6em);
+		margin: 0 auto;
+	}
+	.sell-page-returning > ul .wrapper, .sell-page-returning .page-title.wrapper {
+		width: ($break-large - 12em);
+	}
+
+
+	/* 
+	Page Titles
+	================================================== */
+	.page-title {
+		h2 {
+			font-size: 1.65em;
+		}
+	}
+	.sell-page-new {
+		.page-title {
+			h3 {
+				font-size: 1em;
+			}
+		}
+	}
+
+	/* 
+	Sell Page
+	================================================== */
+	.tiers {
+		& > div {
+			div {
+				min-height: 540px;
+			}
+		}
+	}
+
+	/*
+	Shopping Cart
+	=================================================== */
+	.checkout .cart div ul li ul li .remove-from-cart, .checkout .cart div ul li ul li .remove-custom-from-cart {
+		margin: 10px 0 0 10px;
+	}
+	.checkout .cart div ul li ul li .line-item-cost {
+		width: 156px;
+	}
+	.checkout .cart div ul li ul li.custom .line-item-cost {
+		width: 154px;
+	}
+	.checkout .cart div ul li ul li .product-title {
+		width: 240px;
+	}
+
+}

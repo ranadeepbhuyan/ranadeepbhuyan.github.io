@@ -1,0 +1,193 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Checks, Business Cards &amp; More</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="../css/bootstrap.css">
+        <link rel="stylesheet" href="../css/style.css">
+        <!--[if lte IE 8]>
+            <link rel="stylesheet" href="../css/all-old-ie.css">
+        <![endif]-->
+    </head>
+    <body class="checkout">
+        <div class="header">
+            <div class="primary-nav">
+                <h1>Checkout</h1>
+            </div>
+            <div class="secondary-nav">
+                <div>`
+                    <a href="tel:18665703842">(866) 570-3842</a>
+                    <a href="#" class="chat">Chat</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="full-header">
+            <div class="wrapper oneCol progress">
+                <div>
+                    <img src="../images/CheckoutProgress_shipping.png" />
+                </div>
+            </div>
+        </div>
+
+
+        <div id="updateMessaging" class="wrapper oneCol">
+            <div>
+                <div class="update-messaging success">
+                    <h3>Your shipping information has been changed.</h3>
+                    <p>Your shipping options, shipping costs, and taxes have also changed. <br/>Please review them before placing your order.</p>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="wrapper oneCol page-title">
+            <div>
+                <div class="actions">
+                    <h2>Shipping Information</h2>
+                    <div>
+                        <a href="payment.html" class="button">Next: Add Payment Info</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="wrapper sidebar">
+            <div class="two-thirds">
+
+
+
+                <div id="editShipping">
+                    <small>* Required Fields</small>
+                    <form action="" method="post">
+                        <div class="oneCol">
+                            <div>
+                                <ul>
+                                    <li>
+                                        <label for="shippingOnlyFirstName" class="first-name">First Name *
+                                            <input type="text" id="shippingOnlyFirstName" class="first-name" />
+                                        </label>
+                                        <label for="shippingOnlyLastName" class="last-name">Last Name *
+                                            <input type="text" id="shippingOnlyLastName" class="last-name" />
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label for="shippingOnlyBusinessName">Business Name
+                                            <input type="text" id="shippingOnlyBusinessName" class="business-name" />
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label for="shippingOnlyAddressOne">Address 1 * <small>we cannot ship to p.o. boxes</small>
+                                            <input type="text" id="shippingOnlyAddressOne" class="address-name" placeholder="1234 Main St" />
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label for="shippingOnlyAddressTwo">Address 2
+                                            <input type="text" id="shippingOnlyAddressTwo" class="address-street" placeholder="Ste 123" />
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label for="shippingOnlyCity" class="city">City *
+                                            <input type="text" id="shippingOnlyCity" placeholder="Anytown" />
+                                        </label>
+                                        <label for="shippingOnlyState" class="state">State *
+                                            <input type="text" id="shippingOnlyState" placeholder="CA" />
+                                        </label>
+                                        <label for="shippingOnlyZip" class="zip">Zip Code *
+                                            <input type="text" id="shippingOnlyZip" placeholder="12345" />
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label for="shippingOnlyPhone">Phone Number *
+                                            <input type="text" id="shippingOnlyPhone" class="address-phone" placeholder="(555) 555 - 1234" />
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label for="shippingOnlyEmail">Email Address *
+                                            <input type="email" id="shippingOnlyEmail" class="email" />
+                                        </label>
+                                    </li>
+                                    <li class="checkbox">
+                                        <label for="useForBilling">
+                                            <input type="checkbox" id="useForBilling" checked />Use this for my billing information.
+                                        </label>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div><!-- End .twoCol -->
+                    </form>
+                </div><!-- End #editShipping -->
+
+                <div class="shipping-billing-options delivery-speed">
+                    <h3 class="section-header">Delivery Speed</h3>
+                    <ul>
+                        <li>                            
+                            <input type="radio" name="shipping-speed" id="ground" checked="checked" />
+                            <label for="ground"><em>Ground <span class="strike-through">$10.00</span><strong class="free-shipping">FREE</strong></em> Arrive no later than 3/22/2015</label>
+                        </li>
+                        <li>
+                            <input type="radio" name="shipping-speed" id="second-day" />
+                            <label for="second-day"><em>2nd Day $40.00</em> Arrive no later than 3/22/2015</label>
+                        </li>
+                        <li>
+                            <input type="radio" name="shipping-speed" id="next-day" />
+                            <label for="next-day"><em>Next Day $40.00</em> Arrive no later than 3/22/2015</label>
+                        </li>
+                        <li class="signature-required">
+                            <input type="checkbox" id="signature-required" checked />
+                            <label for="signature-required"><em>Require Signature $5.00
+                                <div class="tooltip">
+                                    <button type="button">&#63;</button>
+                                    <div>
+                                        <h5>We care!</h5>
+                                        <p>For your security, we recommend that you have someone present to receive and sign for your order. This protects you against criminals intercepting your order before you get it.</p>
+                                    </div>
+                                </div>
+                            </em>
+                            <i>Recommended for your security</i></label>
+                        </li>
+                    </ul>
+                    <p>Most orders ship within 48 hours.<br/>Custom orders may take up to 6 days.</p>
+                </div><!-- End Delivery Speed -->
+
+
+            </div><!-- End 2/3 column -->
+            <div class="one-third">
+                
+                <div class="panel">
+                    <h3><strong>Your order</strong></h3>
+                    <dl class="pricing-list">
+                        <dt>3 items</dt>
+                        <dd>$240.00</dd>
+                        <dt><strong>Subtotal</strong></dt>
+                        <dd><strong>$240.00</strong></dd>           
+                    </dl>
+                </div>
+
+            </div><!-- End 1/3 column -->
+        </div>
+        
+    	<div class="bananaTrowser">
+            <a href="payment.html" class="button">Next: Add Payment Info</a>
+            <a href="shopping-cart.html" class="tertiary">Back to Cart</a>
+    	</div>
+
+        <script src="../js/jquery-1.11.1.js"></script>  
+        <script src="../js/respond.js"></script>
+        <script src="../js/bootstrap.min.js"></script>
+        <script src="../js/bootstrap-modal-popover.js"></script>
+        <script src="../js/main.js"></script>
+
+        <script>
+        $(function() {
+            $("#shippingOnlyFirstName").focus();
+        });
+        </script>
+
+
+    </body>
+</html>

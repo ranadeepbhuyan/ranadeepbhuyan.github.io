@@ -1,0 +1,120 @@
+@media screen and ( min-width: $break-medium ) {
+
+	/* 
+	Grids
+	============================================ */
+	.wrapper {
+		padding: 0 2em;
+		&:after {
+		  content: "";
+		  display: table;
+		  clear: both;
+		}
+		&.twoCol {
+			&:after {
+				content: "";
+				display: table;
+				clear: both;
+			}
+			& > div {
+				width: 50%;
+				float: left;
+				padding: 2%;
+			}
+		}
+		&.sidebar {
+			&:after {
+				content: "";
+				display: table;
+				clear: both;
+			}
+			& > div {
+				float: left;
+				padding: 2%;
+				&.review-order, &.two-thirds {
+					width: 65%;
+				}
+				&.shipping-billing-options, &.one-third {
+					width: 35%;
+				}
+			}
+		}
+	}
+	.customize {
+		.wrapper {
+			width: ($break-large - 10em);
+		}
+	}
+
+
+
+	/*
+	Forms
+	================================================== */
+	.form-control.button.secondary {
+	  padding: 2px;
+	}
+
+
+	/* 
+	Sell Page
+	================================================== */
+	.tiers {
+		& > div {
+			div {
+				min-height: 500px;
+				img {
+					margin-bottom: -1.5em;
+				}
+				a.button {
+					margin-bottom: 1em;
+					font-size: 0.7em;
+				}
+				p {
+					font-size: 0.75em;
+					line-height: 1.4em;
+				}
+				.price {
+					font-size: 0.75em;
+					margin-top: 0.5em;
+					margin-bottom: 0.85em;
+					span {
+						font-size: 1.65em;
+					}
+				}
+			}
+		}
+	}
+
+
+
+
+	/* 
+	Page Titles
+	================================================== */
+	.page-title {
+		h2 {
+			font-size: 1.35em;
+		}
+	}
+	.sell-page-new {
+		.page-title {
+			h3 {
+				font-size: 18px;
+			}
+		}
+	}
+
+	/* 
+	Home Page
+	================================================== */
+	.home {
+		.page-title {
+			.hero {
+				width: 50%;
+			}
+		}
+	}
+
+
+}

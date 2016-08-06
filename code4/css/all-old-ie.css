@@ -1,0 +1,115 @@
+/* Forms ============================== */
+.form-control {
+	padding: 4px 2px;
+	font-size: 14px;
+	line-height: 20px;
+	vertical-align: text-top;
+	margin-top: -6px;
+	margin-bottom: 6px;
+}
+
+/* Customization ==================== */
+.customize .form > div div.business-information {
+	top: 66px;
+}
+
+.customize .form > div div.business-information .zipcode {
+	width: 60px;
+}
+.customize .form > div div.business-information .telephone {
+	width: 89px;
+}
+.customize .form > div div.business-information input.street-address {
+	width: 290px;
+}
+
+.customize .form > div div.bank-information {
+	top: 70px;
+	left: 430px;
+}
+.customize .form > div div.bank-information ul li.first select {
+	margin-bottom: 0;
+	width: 240px;
+}
+.customize .form > div div.bank-information input.street-address {
+	width: 240px;
+}
+
+.customize .form > div div input {
+	padding: 0;
+}
+
+.customize .form > div div.bank-information li .city {
+	width: 121px;
+}
+.customize .colors {
+	min-height: 136px;
+}
+.customize .form > div div.business-logo {
+	background: #fff;
+}
+.customize .form > div div.account-numbers {
+	left: 134px;
+	width: 400px;
+}
+.customize .form > div div.account-numbers ul li {
+	margin-right: 10px;
+}
+
+
+/* Global Navigation ==================================== */
+.header > div.primary-nav {
+	width: 60%;
+}
+.header > div.primary-nav ul li a {
+	display: block;
+}
+.header > div.primary-nav ul li span {
+	display: block;
+}
+
+dropdown.open > .dropdown-toggle,
+.dropdown.active > .dropdown-toggle,
+.dropdown.open.active > .dropdown-toggle { 
+    filter: none!important;
+    background-image: none;
+}
+
+
+/* Page Titles ==================================== */
+.page-title .actions {
+	width: 100%;
+}
+.page-title .actions h2,.page-title .actions div {
+	display: inline-block;
+}
+
+
+/* Product Lists ==================================== */
+.product-list > ul.deposit-slips > li .wrapper div {
+	margin-bottom: -9px;
+}
+.product-list > ul > li .wrapper div select {
+	padding: 6px 4px;
+}
+
+
+/* Shopping Cart ====================================== */
+.checkout .cart div ul li ul li .remove-from-cart {
+	margin: 2px 0px 0 20px;
+}
+.checkout .cart div ul li ul li .remove-custom-from-cart {
+	margin: 10px 0px 0 20px;
+}
+.checkout .cart div ul li ul li .line-item-cost {
+	width: 89px;
+}
+
+
+/*
+Feedbackify Tab
+======================================================== */
+#feedbackify .fby-tab-r {
+  margin-right: 18px !important;
+}
+

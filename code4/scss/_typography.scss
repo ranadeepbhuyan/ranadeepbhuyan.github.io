@@ -1,0 +1,291 @@
+@font-face {
+  font-family: 'din-light';
+  src: url('../fonts/DINNextLTPro-Light.eot');
+  src: url('../fonts/DINNextLTPro-Light.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/DINNextLTPro-Light.woff') format('woff'),
+       url('../fonts/DINNextLTPro-Light.ttf')  format('truetype');
+}
+@font-face {
+  font-family: 'din-medium';
+  src: url('../fonts/DINNextLTPro-Medium.eot');
+  src: url('../fonts/DINNextLTPro-Medium.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/DINNextLTPro-Medium.woff') format('woff'),
+       url('../fonts/DINNextLTPro-Medium.ttf')  format('truetype');
+}
+@font-face {
+  font-family: 'din-regular';
+  src: url('../fonts/DINNextLTPro-Regular.eot');
+  src: url('../fonts/DINNextLTPro-Regular.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/DINNextLTPro-Regular.woff') format('woff'),
+       url('../fonts/DINNextLTPro-Regular.ttf')  format('truetype');
+}
+@font-face {
+  font-family: 'neue-bold';
+  src: url('../fonts/HelveticaNeueLTW1G-Bd.eot');
+  src: url('../fonts/HelveticaNeueLTW1G-Bd.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/HelveticaNeueLTW1G-Bd.woff') format('woff'),
+       url('../fonts/HelveticaNeueLTW1G-Bd.ttf')  format('truetype');
+}
+@font-face {
+  font-family: 'neue-lt';
+  src: url('../fonts/HelveticaNeueLTW1G-lt.eot');
+  src: url('../fonts/HelveticaNeueLTW1G-lt.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/HelveticaNeueLTW1G-lt.woff') format('woff'),
+       url('../fonts/HelveticaNeueLTW1G-lt.ttf')  format('truetype');
+}
+@font-face {
+  font-family: 'neue-LT';
+  src: url('../fonts/HelveticaNeueLTW1G-Lt.eot');
+  src: url('../fonts/HelveticaNeueLTW1G-Lt.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/HelveticaNeueLTW1G-Lt.woff') format('woff'),
+       url('../fonts/HelveticaNeueLTW1G-Lt.ttf')  format('truetype');
+}
+@font-face {
+  font-family: 'neue-roman';
+  src: url('../fonts/HelveticaNeueLTW1G-Roman.eot');
+  src: url('../fonts/HelveticaNeueLTW1G-Roman.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/HelveticaNeueLTW1G-Roman.woff') format('woff'),
+       url('../fonts/HelveticaNeueLTW1G-Roman.ttf')  format('truetype');
+}
+@font-face {
+  font-family: 'geo-medium';
+  src: url('../fonts/geogrotesque-w03-medium-en.eot');
+  src: url('../fonts/geogrotesque-w03-medium-en.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/geogrotesque-w03-medium-en.woff') format('woff'),
+       url('../fonts/geogrotesque-w03-medium-en.ttf')  format('truetype');
+}
+@font-face {
+  font-family: 'avenir-demi';
+  src: url('../fonts/avenir-next-ltw04-demi-en.eot');
+  src: url('../fonts/avenir-next-ltw04-demi-en.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/avenir-next-ltw04-demi-en.woff') format('woff'),
+       url('../fonts/avenir-next-ltw04-demi-en.ttf')  format('truetype');
+}
+@font-face {
+  font-family: 'avenir-demi-italic';
+  src: url('../fonts/avenir-next-ltw04-demiitalic-en.eot');
+  src: url('../fonts/avenir-next-ltw04-demiitalic-en.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/avenir-next-ltw04-demiitalic-en.woff') format('woff'),
+       url('../fonts/avenir-next-ltw04-demiitalic-en.ttf')  format('truetype');
+}
+@font-face {
+  font-family: 'avenir-italic';
+  src: url('../fonts/avenir-next-ltw04-italic-en.eot');
+  src: url('../fonts/avenir-next-ltw04-italic-en.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/avenir-next-ltw04-italic-en.woff') format('woff'),
+       url('../fonts/avenir-next-ltw04-italic-en.ttf')  format('truetype');
+}
+@font-face {
+  font-family: 'avenir-medium';
+  src: url('../fonts/avenir-next-ltw04-medium-en.eot');
+  src: url('../fonts/avenir-next-ltw04-medium-en.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/avenir-next-ltw04-medium-en.woff') format('woff'),
+       url('../fonts/avenir-next-ltw04-medium-en.ttf')  format('truetype');
+}
+@font-face {
+  font-family: 'avenir-regular';
+  src: url('../fonts/avenir-next-ltw04-regular-en.eot');
+  src: url('../fonts/avenir-next-ltw04-regular-en.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/avenir-next-ltw04-regular-en.woff') format('woff'),
+       url('../fonts/avenir-next-ltw04-regular-en.ttf')  format('truetype');
+}
+
+
+@-webkit-viewport{width:device-width}
+@-moz-viewport{width:device-width}
+@-ms-viewport{width:device-width}
+@-o-viewport{width:device-width}
+@viewport{width:device-width}
+
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; 
+  -webkit-transition: all 200ms ease;
+  -moz-transition: all 200ms ease;
+  -ms-transition: all 200ms ease;
+  -o-transition: all 200ms ease;
+  transition: all 200ms ease;
+}
+
+/*
+Selection
+======================================================== */
+::selection {
+  background: #e1eed3;
+  color: #404040;
+}
+::-moz-selection {
+  background: #e1eed3;
+  color: #404040;
+}
+::-webkit-selection {
+  background: #e1eed3;
+  color: #404040;
+}
+
+/*
+HTML General Styling
+======================================================== */
+html {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  font-family: 'neue-roman', 'Open Sans', Helvetica, sans-serif;
+  margin: 0;
+  padding: 0 0 5em;
+  color: #404040;
+  background: #fff;
+  font-size: 1.125em; /*18px*/
+  line-height: 1.5;
+  position: relative;
+}
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  margin: 0;
+  font-size: 85%;
+}
+th {
+  border-bottom: 4px solid #e3eaf3;
+  text-align: left;
+  font-size: 14px;
+  line-height: 20px;
+  vertical-align: bottom;
+}
+th, td {padding: 6px;}
+
+img {border-style: none;}
+
+address {
+  font-style: normal;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: normal;
+  line-height: 1.5;
+  margin: 0 0 0.5em;
+}
+h1 {
+  font-size: 2.111em; /*38px*/
+  color: #404040;
+}
+h2 {
+  font-size: 1.444em; /*26px*/
+  color: #545d65;
+}
+p ~ h2 {margin-top: 2em;}
+h3 {
+  font-size: 1.111em; /*20px*/
+    color: #778088;
+}
+h3.section-header {
+  border-bottom: #dcdcdc solid 3px;
+}
+.section-header-description {
+  line-height: 1.2;
+  font-size: 0.85em;
+  margin-bottom: 2em;  
+}
+h3.section-subheader {
+  font-size: 1em;
+  margin-top: 1.75em;
+  margin-bottom: 0.25em;
+  &.no-top-margin {
+    margin-top: 0;
+  }
+}
+
+h4 {
+  font-size: 0.889em; /*16px*/
+  color: #9ca8b2;
+}
+h5 {
+  font-size: 0.875em; /*14px*/
+  color: #9ca8b2;
+}
+h6 {
+  font-size: 0.667em; /*12px*/
+  color: #9ca8b2;
+  text-transform: uppercase;
+}
+
+p {margin: 0 0 1.25em;}
+
+small {
+  font-size: 0.667em; /*12px*/
+  line-height: 0.667em;
+}
+
+a {
+  color: #0095ca;
+  text-decoration: none;
+}
+a:hover {
+  color: #1c3a84;
+  text-decoration: none;
+}
+
+ol, ul { 
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+dl {
+  margin-top: 0;
+  margin-bottom: 20px;
+  dt {
+    float: left;
+    width: 130px;
+    overflow: hidden;
+    clear: left;
+    font-weight: bold;
+    text-align: left;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  dd {
+    margin-left: 130px;
+  }
+}
+blockquote, q { quotes: none }
+blockquote:before, blockquote:after, q:before, q:after {
+  content: '';
+  content: none;
+}
+blockquote {
+  padding: 0 0 0 1.875em;
+  margin: 1.875em 0;
+  font-weight: 300;
+  font-size: 1.250em; /*20px*/
+  color: #738a9f;
+  border-left: solid 10px #e3eaf3;
+}
+
+mark {
+  background: #e3eaf3;
+  padding: 0 3px;
+}
+
+ins {text-decoration: none;}
+
+del {text-decoration: line-through;}
+
+code {
+  background: #f3f8fe;
+  border: 1px solid #e3eaf3;
+  padding: 0 10px;
+  border-radius: 2px;
+  display: inline-block;
+}
+
+
+
+

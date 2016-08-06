@@ -1,0 +1,241 @@
+/* 
+Customization
+================================================== */
+
+.customize {
+	.header {
+		margin-bottom: 0;
+		& > div.primary-nav {
+			a {
+				margin-left: 10px;
+				font-size: 14px;
+			}
+			h1 {
+				margin-top: 0;
+			}
+		}
+	}
+	.wrapper.oneCol {
+		&.preview, &.form {
+			& > div {
+				padding-top: 0;
+				position: relative;
+				p {
+					color: #666;
+					font-size: 0.8em;
+				}
+				div {
+					position: absolute;
+					input {
+						width: 100%;
+					}				
+					ul {
+						margin: 0;
+						padding: 0;
+						li {
+							display: block;
+						}
+					}
+					input {
+						padding: 4px;
+						margin: 0;
+					}
+					.city-state-zip {
+						input {
+							display: inline;
+						}
+					}				
+					li {
+						margin-bottom: -4px;
+					}
+					&.business-logo {
+						text-align: center;
+						vertical-align: middle;
+						top: 85px;
+						left: 46px;
+						color: #666;
+						padding: 26px 16px;
+						font-size: 0.5em;
+						background: #fff url(../images/ico-edit.png) no-repeat bottom 4px right 4px;
+						&:hover {
+							cursor: pointer;
+						}
+					}
+					&.business-information {
+						width: 35%;
+						top: 80px;
+						left: 130px;
+						.city {
+							width: 90px;
+						}
+						.state {
+							width: 40px;
+						}
+						.zipcode {
+							width: 70px;
+						}
+						.telephone {
+							width: 110px;
+						}
+					}	
+					&.bank-information {
+						width: 30%;
+						top: 84px;
+						left: 467px;
+						li {
+							.select2-container .select2-selection--single .select2-selection__rendered {
+								padding: 2px 15px 0px 8px;
+								font-size: 0.75em;
+							}
+							.select2-container--default .select2-selection--single .select2-selection__arrow {
+								top: 1px;
+							}
+							.select2-container--default .select2-selection--single .select2-selection__rendered {
+								line-height: 23px;
+							}
+							&.first {
+								margin-top: -4px;
+							}
+							.city {
+								width: 160px;
+							}
+							.state {
+								width: 40px;
+							}
+							.zipcode {
+								width: 70px;
+							}
+						}
+					}
+					&.check-number {
+						right: 48px;
+						top: 68px;
+						input {
+							width: 100px;
+						}
+					}
+					&.account-numbers {
+						bottom: 70px;
+						left: 130px;
+						width: 380px;
+						ul {
+							li {
+								display: inline-block;
+								width: 46%;
+								margin-right: 20px;
+								&:last-of-type {
+									margin-right: 0;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		&.preview {
+			& > div {
+				div {
+					&.business-logo {
+						background: none;
+						img {
+
+						}
+					}
+					&.business-information, &.bank-information {
+						line-height: 21px;
+					}
+					&.check-number {
+						right: 80px;
+					}
+				}
+			}
+		}
+	}
+	.colors {
+		min-height: 195px;
+		ul {
+			margin: 0;
+			padding: 0;
+			li {
+				display: inline-block;
+				position: relative;
+				a {
+					display: inline-block;
+					padding: 10px;
+					border: transparent solid 1px;
+					line-height: 0;
+					margin-bottom: 0;
+					&:hover {
+						border: #8c8c8c solid 1px;
+					}
+				}
+				&.active {
+					a {
+						border: #8c8c8c solid 1px;
+					}
+				}
+				.messaging {
+					display: none;
+					position: absolute;
+					top: -34px;
+					left: -7px;
+					& > div {
+						width: 70px;
+						text-align: center;
+						&:after {
+							margin-left: -12px;
+						}
+					}
+				}
+			}
+		}
+	}
+	.quantity {
+		.select2-container {
+			margin-bottom: 1em;
+		}
+		h4 {
+			font-weight: normal;
+			margin-bottom: 0;
+			color: #505050;
+			font-size: 14px;
+			margin-top: 1em;
+		}
+		label {
+			font-size: 0.75em;
+		}
+	}
+	.check-stub {
+		min-height: 148px;
+		margin-bottom: 6em;
+		input[type=text] {
+			width: 100%;
+			padding: 8px;
+			font-size: 14px;
+			margin-top: 10px;
+			margin-bottom: 16px;
+		}
+		label {
+			color: #505052;
+			font-size: 14px;
+		}
+	}
+	.signature-lines {
+		min-height: 188px;
+		input[type=text] {
+			width: 100%;
+			padding: 8px;
+			font-size: 14px;
+			margin-top: 16px;
+		}
+		label {
+			font-size: 14px;
+		}
+		select {
+			width: 50px;
+		}
+	}
+	.panel .tooltip div {
+		right: -92px;
+	}
+}
