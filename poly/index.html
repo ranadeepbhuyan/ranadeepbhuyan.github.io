@@ -17,14 +17,24 @@
         font-size:70px;
         float:center;
     }
-    p{
+    h2{
+        font-size:55px;
+        float:center;
+    }
+    h3{
         font-size:40px;
         float:center;
     }
-    p.twenty{
+    h6{
         font-size:20px;
         float:center;
+        color: red;
     }
+    p{
+        font-size:30px;
+        float:center;
+    }
+   
     ul{
         font-size:40px;
         float:left;
@@ -75,19 +85,18 @@
             <img src="/poly/src/now.png" height="500px;">
         </ninja-slide>
 
-        <ninja-slide background="black">
+        <ninja-slide background="black" font='Port Lligat Slab' color='white' align='left' >
             <h3>HTML INPUT</h3>
             <br>
-            <ul font='Port Lligat Slab' >
+            <ul>
                 <p class="fragment twenty">var input = document.CreateElement('input')</p>
                 <p class="fragment twenty">input :<input></p>
                 <p class="fragment twenty">input.selectionStart</p>
                 <p class="fragment twenty">:0</p>
                 <p class="fragment twenty">input.type = 'number'</p>
                 <p class="fragment">"number"</p>
-                <p class="fragment">input.type = 'number'</p>
                 <p class="fragment">input.selectionStart</p>
-                <p class="fragment">Uncaught DOMException: Failed to read the 'selectionStart' property from 'HTMLInputElement': The input element's type ('number') does not support selection</p>
+                <h6 class="fragment">Uncaught DOMException: Failed to read the 'selectionStart' property from 'HTMLInputElement': The input element's type ('number') does not support selection</h6>
             </ul>
         </ninja-slide>
         
