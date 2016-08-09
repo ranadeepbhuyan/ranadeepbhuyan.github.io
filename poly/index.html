@@ -21,6 +21,8 @@
         font-size:55px;
         float:center;
     }
+    .red{ color: red; }
+    .green{ color: green; }
     h3{
         font-size:40px;
         float:center;
@@ -89,13 +91,14 @@
             <h3>HTML INPUT</h3>
             <br>
             <ul>
-                <p class="fragment twenty">var input = document.CreateElement('input')</p>
-                <p class="fragment twenty">input :<input></p>
-                <p class="fragment twenty">input.selectionStart</p>
+                <p class="fragment twenty"><span class="red">var</span><span class="green"> input = document.CreateElement('input')</span></p>
+                <p class="fragment twenty">:input <input></p>
+                <p class="fragment twenty"><span class="green"> input.selectionStart </span></p>
                 <p class="fragment twenty">:0</p>
-                <p class="fragment twenty">input.type = 'number'</p>
+                <p class="fragment twenty"><span class="green"> input.type = 'number'</span></p>
                 <p class="fragment">"number"</p>
-                <p class="fragment">input.selectionStart</p>
+                <p class="fragment"><span class="green"> input.selectionStart</span></p>
+                <br>
                 <h6 class="fragment">Uncaught DOMException: Failed to read the 'selectionStart' property from 'HTMLInputElement': The input element's type ('number') does not support selection</h6>
             </ul>
         </ninja-slide>
