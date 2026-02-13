@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PAGODA-Net: Strategic Research Pivot</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #F3F4F6; color: #1F2937; }
+        .card { background-color: white; border-radius: 0.75rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); transition: all 0.3s ease; }
+        .card:hover { box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); }
+        .nav-item { cursor: pointer; padding: 0.75rem 1rem; border-radius: 0.5rem; transition: all 0.2s; color: #4B5563; font-weight: 500; }
+        .nav-item:hover { background-color: #E5E7EB; color: #111827; }
+        .nav-item.active { background-color: #EFF6FF; color: #2563EB; border-left: 4px solid #2563EB; }
+        .chart-container { position: relative; width: 100%; height: 300px; max-height: 400px; }
+        .hidden-section { display: none; }
+        .fade-in { animation: fadeIn 0.5s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        /* Custom scrollbar for sidebar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #c1c1c1; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #a8a8a8; }
+    </style>
+    <!-- Chosen Palette: "Scientific Blue & Slate" - Professional, academic, trustworthy. Base: Slate-50/100. Primary: Blue-600. Secondary: Indigo-500. Text: Gray-800. -->
+    <!-- Application Structure Plan: Dashboard layout with a left sidebar for navigation and a main content area.
+         Sections:
+         1. Executive Summary: High-level view of the pivot logic.
+         2. The Scientific Gap: Interactive comparison of Old vs. New hypothesis (Tumor vs. AD/TBI).
+         3. Expanded Domains: Details on AD, TBI, and Motor Mapping (fulfilling the "not just AD" request).
+         4. Architecture (PAGODA-Net V2): Visualizing the shift from Segmentation to Synthesis.
+         5. Roadmap & Metrics: Timeline and new validation metrics (PSNR vs Dice).
+         This structure mimics the flow of a research paper (Intro -> Background -> Method -> Plan) but allows non-linear exploration. -->
+    <!-- Visualization & Content Choices:
+         - Cost/Invasiveness Chart (Bar): To visually justify the need for Synthesis (MRI is cheap, PET is expensive).
+         - Domain Applicability (Radar): To show why AD and TBI are better candidates than Tumors for this specific architecture.
+         - Architecture Diagram (HTML/CSS Flow): To explain the "Dual Stream" concept clearly without SVG.
+         - Roadmap (Timeline): To provide a clear execution plan.
+         - CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+</head>
+<body class="h-screen flex overflow-hidden">
+
+    <!-- Sidebar -->
+    <aside class="w-64 bg-white border-r border-gray-200 flex-shrink-0 flex flex-col h-full z-10">
+        <div class="p-6 border-b border-gray-100">
+            <h1 class="text-xl font-bold text-gray-800 tracking-tight">PAGODA-Net <span class="text-blue-600 text-sm block font-normal">Research Strategy Pivot</span></h1>
+        </div>
+        <nav class="flex-1 overflow-y-auto p-4 space-y-2">
+            <div class="nav-item active" onclick="showSection('dashboard')">📊 Executive Dashboard</div>
+            <div class="nav-item" onclick="showSection('scientific-gap')">🔬 The Scientific Gap</div>
+            <div class="nav-item" onclick="showSection('expanded-domains')">🧠 Expanded Domains</div>
+            <div class="nav-item" onclick="showSection('architecture')">🏗️ Architecture V2</div>
+            <div class="nav-item" onclick="showSection('datasets')">💾 Datasets & Metrics</div>
+        </nav>
+        <div class="p-4 border-t border-gray-100">
+            <div class="bg-blue-50 p-3 rounded-lg">
+                <p class="text-xs text-blue-800 font-semibold">Status: <span class="text-blue-600">Planning Phase</span></p>
+                <p class="text-xs text-gray-500 mt-1">Refactoring target: Top-tier Clinical AI Journals</p>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 overflow-y-auto bg-gray-50 p-8 relative" id="main-content">
+        
+        <!-- Dashboard Section -->
+        <div id="dashboard" class="section fade-in">
+            <header class="mb-8">
+                <h2 class="text-3xl font-bold text-gray-900">Research Pivot Strategy</h2>
+                <p class="text-gray-500 mt-2">Transitioning from Tumor Segmentation to <span class="font-semibold text-blue-600">Cross-Modality Metabolic Synthesis</span>.</p>
+            </header>
+
+            <!-- Key Stats / Highlights -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <div class="card p-6 border-l-4 border-blue-500">
+                    <h3 class="text-sm uppercase tracking-wide text-gray-500 font-semibold">Core Shift</h3>
+                    <p class="text-2xl font-bold text-gray-800 mt-2">Segmentation <span class="text-gray-400">→</span> Synthesis</p>
+                    <p class="text-sm text-gray-600 mt-2">Generative mapping of invisible metabolic traits.</p>
+                </div>
+                <div class="card p-6 border-l-4 border-indigo-500">
+                    <h3 class="text-sm uppercase tracking-wide text-gray-500 font-semibold">Primary Domain</h3>
+                    <p class="text-2xl font-bold text-gray-800 mt-2">Alzheimer's (AD)</p>
+                    <p class="text-sm text-gray-600 mt-2">Strong Structure-Function coupling via ADNI dataset.</p>
+                </div>
+                <div class="card p-6 border-l-4 border-purple-500">
+                    <h3 class="text-sm uppercase tracking-wide text-gray-500 font-semibold">Expansion</h3>
+                    <p class="text-2xl font-bold text-gray-800 mt-2">TBI & Motor</p>
+                    <p class="text-sm text-gray-600 mt-2">Traumatic Injury & Functional Mapping.</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Chart: Rationale -->
+                <div class="card p-6">
+                    <h3 class="text-lg font-bold text-gray-800 mb-4">Why Pivot? The Accessibility Gap</h3>
+                    <p class="text-sm text-gray-600 mb-4">
+                        The scientific value proposition shifts from "just another segmenter" to "democratizing advanced diagnostics." 
+                        We generate expensive, invasive PET features from cheap, safe MRI.
+                    </p>
+                    <div class="chart-container">
+                        <canvas id="accessibilityChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Text: Executive Summary -->
+                <div class="card p-6">
+                    <h3 class="text-lg font-bold text-gray-800 mb-4">Executive Summary</h3>
+                    <div class="space-y-4 text-sm text-gray-600 leading-relaxed">
+                        <p>
+                            <strong class="text-gray-900">Current Issue:</strong> The original paper's focus on Tumor Segmentation is saturated. Furthermore, predicting tumor "function" from structure is controversial due to neurovascular uncoupling.
+                        </p>
+                        <p>
+                            <strong class="text-gray-900">The Solution:</strong> Pivot PAGODA-Net to <span class="text-blue-600 font-semibold">Cross-Modality Synthesis</span>. Instead of drawing boundaries (segmentation), the model will generate pixel-level metabolic maps (Virtual PET) from structural inputs.
+                        </p>
+                        <p>
+                            <strong class="text-gray-900">New Hypothesis:</strong> "Deep Generative Networks can capture non-linear correlations between structural atrophy (MRI) and metabolic hypometabolism (PET) to predict disease biomarkers before they become visible to the human eye."
+                        </p>
+                        <div class="mt-4 p-4 bg-yellow-50 rounded-lg border border-yellow-100">
+                            <span class="font-bold text-yellow-800">Action Item:</span> 
+                            Retain the Dual-Stream Architecture but change the loss function from Dice (Overlap) to L1/Perceptual (Reconstruction).
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scientific Gap Section -->
+        <div id="scientific-gap" class="section hidden-section fade-in">
+            <header class="mb-8">
+                <h2 class="text-3xl font-bold text-gray-900">The Scientific Gap</h2>
+                <p class="text-gray-500 mt-2">Redefining the problem statement for higher impact.</p>
+            </header>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                <div class="card p-6">
+                    <h3 class="text-lg font-bold text-red-700 mb-2">Old: Tumor Segmentation</h3>
+                    <ul class="list-disc pl-5 space-y-2 text-sm text-gray-600">
+                        <li><strong>Problem:</strong> "Where is the tumor?"</li>
+                        <li><strong>Saturation:</strong> Highly saturated (BraTS challenges).</li>
+                        <li><strong>Bio-Coupling:</strong> <span class="text-red-600 font-bold">Weak.</span> Tumors grow chaotically. Structure does not reliably predict function/eloquence due to plasticity.</li>
+                        <li><strong>Verdict:</strong> Hard to publish in top-tier journals without massive novelty.</li>
+                    </ul>
+                </div>
+                <div class="card p-6 ring-2 ring-blue-500">
+                    <h3 class="text-lg font-bold text-blue-700 mb-2">New: Cross-Modality Synthesis</h3>
+                    <ul class="list-disc pl-5 space-y-2 text-sm text-gray-600">
+                        <li><strong>Problem:</strong> "What is the metabolic state?" (Invisible on MRI).</li>
+                        <li><strong>Saturation:</strong> Emerging/High-Value.</li>
+                        <li><strong>Bio-Coupling:</strong> <span class="text-green-600 font-bold">Strong.</span> In AD and TBI, structural damage (axonal shearing, atrophy) directly correlates with metabolic drop-off.</li>
+                        <li><strong>Verdict:</strong> "Virtual Biopsy" concept is highly publishable.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card p-6">
+                <h3 class="text-lg font-bold text-gray-800 mb-4">Structure-Function Coupling Analysis</h3>
+                <p class="text-sm text-gray-600 mb-6">
+                    PAGODA-Net's dual-stream architecture is best suited for domains where structural inputs contain latent features of the target output. 
+                    We evaluated three domains for this suitability.
+                </p>
+                <div class="chart-container w-full max-w-2xl mx-auto">
+                    <canvas id="domainRadarChart"></canvas>
+                </div>
+                <div class="mt-4 text-center text-sm text-gray-500">
+                    <em>Figure: Suitability of different clinical domains for Cross-Modality Synthesis.</em>
+                </div>
+            </div>
+        </div>
+
+        <!-- Expanded Domains Section -->
+        <div id="expanded-domains" class="section hidden-section fade-in">
+            <header class="mb-8">
+                <h2 class="text-3xl font-bold text-gray-900">Expanded Clinical Domains</h2>
+                <p class="text-gray-500 mt-2">Beyond Alzheimer's: Demonstrating Robustness and Generalizability.</p>
+            </header>
+
+            <div class="grid grid-cols-1 gap-6">
+                <!-- Alzheimer's Card -->
+                <div class="card p-6 border-l-4 border-blue-600">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900">1. Alzheimer's Disease (AD)</h3>
+                            <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded mt-1">Primary Focus</span>
+                        </div>
+                        <div class="text-3xl">🧠</div>
+                    </div>
+                    <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-gray-50 p-3 rounded">
+                            <h4 class="font-semibold text-sm text-gray-700">The Input (Source)</h4>
+                            <p class="text-xs text-gray-600 mt-1">T1-weighted MRI. Shows cortical thickness and hippocampal volume.</p>
+                        </div>
+                        <div class="bg-blue-50 p-3 rounded">
+                            <h4 class="font-semibold text-sm text-blue-900">The Output (Target)</h4>
+                            <p class="text-xs text-blue-800 mt-1">FDG-PET. Shows glucose metabolism. AD brains show "hypometabolism" in the temporal lobe often before atrophy is visible.</p>
+                        </div>
+                    </div>
+                    <p class="mt-4 text-sm text-gray-600">
+                        <strong>Why here?</strong> ADNI offers thousands of paired MRI/PET scans. This is the ideal "proof of concept" dataset.
+                    </p>
+                </div>
+
+                <!-- TBI Card -->
+                <div class="card p-6 border-l-4 border-orange-500">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900">2. Traumatic Brain Injury (TBI)</h3>
+                            <span class="inline-block bg-orange-100 text-orange-800 text-xs px-2 py-1 rounded mt-1">Secondary / Generalization</span>
+                        </div>
+                        <div class="text-3xl">🤕</div>
+                    </div>
+                    <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-gray-50 p-3 rounded">
+                            <h4 class="font-semibold text-sm text-gray-700">The Input (Source)</h4>
+                            <p class="text-xs text-gray-600 mt-1">T1/T2 MRI + DTI (Diffusion Tensor Imaging). Shows structural white matter tracts.</p>
+                        </div>
+                        <div class="bg-orange-50 p-3 rounded">
+                            <h4 class="font-semibold text-sm text-orange-900">The Output (Target)</h4>
+                            <p class="text-xs text-orange-800 mt-1">Tau-PET or Functional Outcome Maps. Shows chronic inflammation or specific functional deficits.</p>
+                        </div>
+                    </div>
+                    <p class="mt-4 text-sm text-gray-600">
+                        <strong>Scientific Angle:</strong> Diffuse Axonal Injury (DAI) is often "invisible" on standard MRI. PAGODA-Net can attempt to synthesize the metabolic correlates of DAI from subtle texture changes in the MRI.
+                        <br><strong>Dataset:</strong> FITBIR (Federal Interagency Traumatic Brain Injury Research).
+                    </p>
+                </div>
+
+                <!-- Motor Function Card -->
+                <div class="card p-6 border-l-4 border-emerald-500">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900">3. Motor Function Mapping</h3>
+                            <span class="inline-block bg-emerald-100 text-emerald-800 text-xs px-2 py-1 rounded mt-1">Tertiary / Clinical Utility</span>
+                        </div>
+                        <div class="text-3xl">🖐️</div>
+                    </div>
+                    <p class="mt-4 text-sm text-gray-600">
+                        <strong>Goal:</strong> Generate fMRI activation maps (Motor Cortex) from structural MRI alone.
+                        <br><strong>Use Case:</strong> Pre-surgical planning for patients who cannot perform tasks (sedated/children).
+                        <br><strong>Dataset:</strong> Human Connectome Project (HCP) - offers high-quality structural + task-based fMRI data.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Architecture Section -->
+        <div id="architecture" class="section hidden-section fade-in">
+            <header class="mb-8">
+                <h2 class="text-3xl font-bold text-gray-900">PAGODA-Net V2 Architecture</h2>
+                <p class="text-gray-500 mt-2">Refactoring the Dual-Stream model for Image Translation.</p>
+            </header>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Diagram Column -->
+                <div class="lg:col-span-2">
+                    <div class="card p-8 bg-white overflow-hidden relative min-h-[500px] flex flex-col justify-center items-center">
+                        <h3 class="absolute top-4 left-4 text-sm font-bold text-gray-400 uppercase">Flowchart: Generator Pipeline</h3>
+                        
+                        <!-- Visualization of Flow -->
+                        <div class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-4 w-full">
+                            
+                            <!-- Input -->
+                            <div class="flex flex-col items-center">
+                                <div class="w-24 h-24 bg-gray-800 rounded-lg flex items-center justify-center text-white text-xs font-bold shadow-lg">
+                                    Input MRI<br>(3T/7T)
+                                </div>
+                                <div class="h-8 w-1 bg-gray-300 md:hidden"></div>
+                            </div>
+
+                            <!-- Arrow -->
+                            <div class="hidden md:block text-gray-400 text-2xl">➔</div>
+
+                            <!-- Dual Stream Core -->
+                            <div class="flex flex-col space-y-4 p-4 border-2 border-dashed border-blue-200 rounded-xl bg-blue-50">
+                                <div class="text-center text-xs text-blue-500 font-bold mb-2">PAGODA Dual Stream</div>
+                                
+                                <div class="flex space-x-4">
+                                    <!-- Stream 1 -->
+                                    <div class="flex flex-col items-center">
+                                        <div class="w-32 h-16 bg-white border border-blue-300 rounded flex items-center justify-center text-blue-800 text-xs shadow-sm">
+                                            Stream A:<br>Global Context
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- ILAG -->
+                                    <div class="flex items-center justify-center">
+                                        <div class="w-8 h-8 rounded-full bg-purple-500 text-white flex items-center justify-center text-xs font-bold shadow-md z-10" title="Information-Linked Attenuation Gateway">
+                                            ILAG
+                                        </div>
+                                    </div>
+
+                                    <!-- Stream 2 -->
+                                    <div class="flex flex-col items-center">
+                                        <div class="w-32 h-16 bg-white border border-blue-300 rounded flex items-center justify-center text-blue-800 text-xs shadow-sm">
+                                            Stream B:<br>Local Texture
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Arrow -->
+                            <div class="hidden md:block text-gray-400 text-2xl">➔</div>
+                            <div class="h-8 w-1 bg-gray-300 md:hidden"></div>
+
+                            <!-- Decoder -->
+                            <div class="w-24 h-24 bg-indigo-600 rounded-lg flex items-center justify-center text-white text-xs font-bold shadow-lg text-center">
+                                Decoder<br>(Synthesis)
+                            </div>
+
+                            <!-- Arrow -->
+                            <div class="hidden md:block text-gray-400 text-2xl">➔</div>
+                            <div class="h-8 w-1 bg-gray-300 md:hidden"></div>
+
+                            <!-- Output -->
+                            <div class="w-24 h-24 bg-gradient-to-br from-yellow-400 to-red-500 rounded-lg flex items-center justify-center text-white text-xs font-bold shadow-lg text-center">
+                                Virtual PET<br>(Metabolic Map)
+                            </div>
+                        </div>
+
+                        <div class="mt-8 text-sm text-gray-500 max-w-lg text-center">
+                            <strong>Key Modification:</strong> The output layer changes from a Softmax (Class probabilities for segmentation) to Tanh/Linear (Pixel intensity regression for PET synthesis).
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Details Column -->
+                <div class="space-y-6">
+                    <div class="card p-6">
+                        <h3 class="font-bold text-gray-800 mb-2">Loss Function Overhaul</h3>
+                        <p class="text-sm text-gray-600 mb-4">Dice Score is useless for synthesis. We must adopt:</p>
+                        <ul class="space-y-2 text-sm">
+                            <li class="flex items-center">
+                                <span class="w-2 h-2 bg-blue-500 rounded-full mr-2"></span>
+                                <strong>L1 Loss:</strong> For pixel-level accuracy.
+                            </li>
+                            <li class="flex items-center">
+                                <span class="w-2 h-2 bg-blue-500 rounded-full mr-2"></span>
+                                <strong>Perceptual Loss (VGG):</strong> To maintain textural sharpness.
+                            </li>
+                            <li class="flex items-center">
+                                <span class="w-2 h-2 bg-blue-500 rounded-full mr-2"></span>
+                                <strong>SSIM:</strong> To measure structural similarity.
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card p-6 bg-blue-600 text-white">
+                        <h3 class="font-bold mb-2">The "Invisible" Hypothesis</h3>
+                        <p class="text-sm opacity-90">
+                            By using the ILAG (Information-Linked Attenuation Gateway), we hypothesize that subtle texture variations in the MRI (caused by micro-scale atrophy) can be amplified to predict the macro-scale metabolic drop seen in PET.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Datasets Section -->
+        <div id="datasets" class="section hidden-section fade-in">
+            <header class="mb-8">
+                <h2 class="text-3xl font-bold text-gray-900">Datasets & Experimental Plan</h2>
+                <p class="text-gray-500 mt-2">Data sourcing and validation metrics.</p>
+            </header>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Data Table -->
+                <div class="card p-6">
+                    <h3 class="font-bold text-gray-800 mb-4">Selected Datasets</h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm text-left text-gray-500">
+                            <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+                                <tr>
+                                    <th class="px-4 py-3">Dataset</th>
+                                    <th class="px-4 py-3">Focus</th>
+                                    <th class="px-4 py-3">Modality Pair</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="bg-white border-b hover:bg-gray-50">
+                                    <td class="px-4 py-3 font-medium text-gray-900">ADNI (1, 2, 3)</td>
+                                    <td class="px-4 py-3">Alzheimer's</td>
+                                    <td class="px-4 py-3">MRI ↔ FDG-PET</td>
+                                </tr>
+                                <tr class="bg-white border-b hover:bg-gray-50">
+                                    <td class="px-4 py-3 font-medium text-gray-900">FITBIR / TBI-Care</td>
+                                    <td class="px-4 py-3">TBI</td>
+                                    <td class="px-4 py-3">MRI ↔ Tau-PET</td>
+                                </tr>
+                                <tr class="bg-white border-b hover:bg-gray-50">
+                                    <td class="px-4 py-3 font-medium text-gray-900">HCP (S1200)</td>
+                                    <td class="px-4 py-3">Motor Function</td>
+                                    <td class="px-4 py-3">Structural ↔ fMRI</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Validation Metrics -->
+                <div class="card p-6">
+                    <h3 class="font-bold text-gray-800 mb-4">New Evaluation Metrics</h3>
+                    <p class="text-sm text-gray-600 mb-4">Moving away from Segmentation metrics (Dice, Hausdorff) to Synthesis/Classification metrics.</p>
+                    
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between text-sm font-medium text-gray-700 mb-1">
+                                <span>PSNR (Signal-to-Noise)</span>
+                                <span class="text-blue-600">Target: > 30dB</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-blue-600 h-2 rounded-full" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm font-medium text-gray-700 mb-1">
+                                <span>SSIM (Structural Similarity)</span>
+                                <span class="text-blue-600">Target: > 0.90</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-blue-600 h-2 rounded-full" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm font-medium text-gray-700 mb-1">
+                                <span>Downstream Classification (AUC)</span>
+                                <span class="text-blue-600">Target: > 0.88</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-green-500 h-2 rounded-full" style="width: 88%"></div>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-1">Can the generated PET detect AD as well as real PET?</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-8 card p-6">
+                <h3 class="font-bold text-gray-800 mb-4">Implementation Roadmap</h3>
+                <div class="flex flex-col md:flex-row justify-between items-center text-sm text-gray-600 space-y-4 md:space-y-0">
+                    <div class="flex flex-col items-center">
+                        <div class="w-8 h-8 rounded-full bg-blue-100 text-blue-600 font-bold flex items-center justify-center mb-2">1</div>
+                        <span>Data Prep (ADNI)</span>
+                    </div>
+                    <div class="hidden md:block w-16 h-0.5 bg-gray-300"></div>
+                    <div class="flex flex-col items-center">
+                        <div class="w-8 h-8 rounded-full bg-blue-100 text-blue-600 font-bold flex items-center justify-center mb-2">2</div>
+                        <span>Architecture Mod</span>
+                    </div>
+                    <div class="hidden md:block w-16 h-0.5 bg-gray-300"></div>
+                    <div class="flex flex-col items-center">
+                        <div class="w-8 h-8 rounded-full bg-blue-100 text-blue-600 font-bold flex items-center justify-center mb-2">3</div>
+                        <span>Training (Synthesis)</span>
+                    </div>
+                    <div class="hidden md:block w-16 h-0.5 bg-gray-300"></div>
+                    <div class="flex flex-col items-center">
+                        <div class="w-8 h-8 rounded-full bg-blue-100 text-blue-600 font-bold flex items-center justify-center mb-2">4</div>
+                        <span>Validation (TBI/Motor)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        // --- Navigation Logic ---
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(el => {
+                el.classList.add('hidden-section');
+            });
+            // Show target section
+            const target = document.getElementById(sectionId);
+            if(target) {
+                target.classList.remove('hidden-section');
+                // Trigger chart updates if needed when section becomes visible
+                if (sectionId === 'dashboard') initAccessibilityChart();
+                if (sectionId === 'scientific-gap') initDomainRadar();
+            }
+
+            // Update Nav State
+            document.querySelectorAll('.nav-item').forEach(el => {
+                el.classList.remove('active');
+            });
+            // Find the nav item that calls this function (rough approximation for simple SPA)
+            const navItems = document.querySelectorAll('.nav-item');
+            if(sectionId === 'dashboard') navItems[0].classList.add('active');
+            if(sectionId === 'scientific-gap') navItems[1].classList.add('active');
+            if(sectionId === 'expanded-domains') navItems[2].classList.add('active');
+            if(sectionId === 'architecture') navItems[3].classList.add('active');
+            if(sectionId === 'datasets') navItems[4].classList.add('active');
+        }
+
+        // --- Chart 1: Cost/Invasiveness Comparison (Dashboard) ---
+        function initAccessibilityChart() {
+            const ctx = document.getElementById('accessibilityChart').getContext('2d');
+            if (window.accessibilityChartInstance) window.accessibilityChartInstance.destroy();
+
+            window.accessibilityChartInstance = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Structural MRI (Input)', 'PET Scan (Output)', 'Biopsy (Inv.)'],
+                    datasets: [
+                        {
+                            label: 'Cost ($ USD)',
+                            data: [600, 3000, 5000],
+                            backgroundColor: 'rgba(59, 130, 246, 0.6)',
+                            borderColor: 'rgba(59, 130, 246, 1)',
+                            borderWidth: 1,
+                            yAxisID: 'y'
+                        },
+                        {
+                            label: 'Invasiveness (Radiation/Risk)',
+                            data: [1, 8, 10], // 1-10 Scale
+                            backgroundColor: 'rgba(239, 68, 68, 0.6)',
+                            borderColor: 'rgba(239, 68, 68, 1)',
+                            borderWidth: 1,
+                            yAxisID: 'y1'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            type: 'linear',
+                            display: true,
+                            position: 'left',
+                            title: { display: true, text: 'Avg Cost' }
+                        },
+                        y1: {
+                            type: 'linear',
+                            display: true,
+                            position: 'right',
+                            title: { display: true, text: 'Invasiveness Score (1-10)' },
+                            grid: { drawOnChartArea: false }
+                        }
+                    },
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    if (context.dataset.yAxisID === 'y') {
+                                        return context.dataset.label + ': $' + context.raw;
+                                    }
+                                    return context.dataset.label + ': ' + context.raw + '/10';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // --- Chart 2: Domain Radar (Scientific Gap) ---
+        function initDomainRadar() {
+            const ctx = document.getElementById('domainRadarChart').getContext('2d');
+            if (window.domainRadarInstance) window.domainRadarInstance.destroy();
+
+            window.domainRadarInstance = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: [
+                        'Structure-Function Coupling', 
+                        'Data Availability (Public)', 
+                        'Clinical Urgency (Early Det.)', 
+                        'Novelty Factor', 
+                        'Input-Output Alignment'
+                    ],
+                    datasets: [{
+                        label: 'Brain Tumor (Old)',
+                        data: [30, 90, 80, 20, 40], // Weak coupling, high data, low novelty
+                        fill: true,
+                        backgroundColor: 'rgba(156, 163, 175, 0.2)',
+                        borderColor: 'rgb(156, 163, 175)',
+                        pointBackgroundColor: 'rgb(156, 163, 175)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgb(156, 163, 175)'
+                    }, {
+                        label: 'Alzheimers / ADNI (New)',
+                        data: [90, 95, 85, 85, 90], // Strong coupling, great data, high novelty
+                        fill: true,
+                        backgroundColor: 'rgba(37, 99, 235, 0.2)',
+                        borderColor: 'rgb(37, 99, 235)',
+                        pointBackgroundColor: 'rgb(37, 99, 235)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgb(37, 99, 235)'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    elements: {
+                        line: { borderWidth: 3 }
+                    },
+                    scales: {
+                        r: {
+                            angleLines: { display: true },
+                            suggestedMin: 0,
+                            suggestedMax: 100
+                        }
+                    }
+                }
+            });
+        }
+
+        // Initialize First View
+        window.addEventListener('DOMContentLoaded', () => {
+            initAccessibilityChart();
+        });
+
+    </script>
+</body>
+</html>
