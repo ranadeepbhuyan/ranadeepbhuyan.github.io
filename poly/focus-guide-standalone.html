@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Focus Framework - Study Guide</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --bg: #0f172a; --card: #1e293b; --accent: #38bdf8; --accentDim: #0ea5e9;
+    --warn: #f59e0b; --red: #ef4444; --green: #22c55e; --purple: #a78bfa;
+    --text: #f1f5f9; --muted: #94a3b8; --border: #334155;
+  }
+  body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; min-height: 100vh; padding: 24px 16px; }
+  .container { max-width: 560px; margin: 0 auto; }
+  .header { text-align: center; margin-bottom: 28px; }
+  .header .icon { font-size: 36px; margin-bottom: 4px; }
+  .header h1 { font-size: 22px; font-weight: 700; color: var(--accent); margin: 0; }
+  .header p { color: var(--muted); font-size: 13px; margin: 4px 0 0; }
+  .tabs { display: flex; gap: 4px; margin-bottom: 24px; background: var(--card); border-radius: 10px; padding: 4px; flex-wrap: wrap; }
+  .tab-btn { flex: 1; padding: 8px 4px; border: none; border-radius: 8px; cursor: pointer; font-size: 11.5px; font-weight: 600; background: transparent; color: var(--muted); transition: all 0.2s; min-width: 70px; }
+  .tab-btn.active { background: var(--accent); color: var(--bg); }
+  .tab-btn:hover:not(.active) { color: var(--text); }
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+  .card { background: var(--card); border-radius: 12px; padding: 14px; border: 1px solid var(--border); margin-bottom: 10px; }
+  .card-title { font-size: 14px; font-weight: 700; margin-bottom: 6px; }
+  .card-text { font-size: 12.5px; color: var(--muted); line-height: 1.55; }
+  .step-row { display: flex; align-items: flex-start; gap: 12px; }
+  .step-icon { font-size: 22px; min-width: 36px; text-align: center; padding-top: 2px; }
+  .info-box { border-radius: 12px; padding: 14px; margin-bottom: 14px; }
+  .info-box.warn { background: rgba(245,158,11,0.08); border: 1px solid rgba(245,158,11,0.25); }
+  .info-box.warn .info-title { color: var(--warn); }
+  .info-box.red { background: rgba(239,68,68,0.07); border: 1px solid rgba(239,68,68,0.2); }
+  .info-box.red .info-title { color: var(--red); }
+  .info-box.green { background: rgba(34,197,94,0.07); border: 1px solid rgba(34,197,94,0.2); }
+  .info-box.green .info-title { color: var(--green); }
+  .info-box.purple { background: rgba(167,139,250,0.08); border: 1px solid rgba(167,139,250,0.25); }
+  .info-box.purple .info-title { color: var(--purple); }
+  .info-title { font-size: 14px; font-weight: 700; margin-bottom: 10px; }
+  .info-item { margin-bottom: 8px; }
+  .info-item:last-child { margin-bottom: 0; }
+  .info-item-title { font-size: 13px; font-weight: 600; color: var(--text); }
+  .info-item-desc { font-size: 11.5px; color: var(--muted); margin-top: 2px; }
+  .accent-card { background: var(--card); border-radius: 12px; padding: 14px; border: 1px solid var(--border); margin-top: 14px; }
+  .accent-card .key { font-size: 13px; color: var(--accent); font-weight: 700; }
+  .tracker-count { text-align: center; padding: 16px; }
+  .tracker-count .label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+  .tracker-count .num { font-size: 48px; font-weight: 800; color: var(--muted); }
+  .tracker-count .num.has-sessions { color: var(--accent); }
+  .tracker-count .msg { font-size: 12px; color: var(--muted); margin-top: 4px; }
+  input[type="text"] { width: 100%; padding: 10px 12px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg); color: var(--text); font-size: 13px; margin-bottom: 10px; outline: none; }
+  input[type="text"]:focus { border-color: var(--accent); }
+  .btn-row { display: flex; gap: 8px; }
+  .btn-primary { flex: 1; padding: 10px 0; border-radius: 8px; border: none; cursor: pointer; background: var(--accent); color: var(--bg); font-weight: 700; font-size: 13px; }
+  .btn-primary:hover { background: var(--accentDim); }
+  .btn-secondary { padding: 10px 14px; border-radius: 8px; border: 1px solid var(--border); cursor: pointer; background: transparent; color: var(--muted); font-size: 12px; }
+  .btn-secondary:hover { color: var(--text); border-color: var(--muted); }
+  .session-entry { background: var(--card); border-radius: 10px; padding: 10px 14px; border: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+  .session-entry .name { font-size: 13px; font-weight: 600; }
+  .session-entry .time { font-size: 11px; color: var(--muted); margin-top: 2px; }
+  .session-entry .dur { font-size: 11px; color: var(--green); font-weight: 600; }
+  .empty { text-align: center; padding: 24px; color: var(--muted); font-size: 13px; }
+  .footer { text-align: center; color: var(--muted); font-size: 11px; margin-top: 32px; opacity: 0.6; }
+  .timer-display { text-align: center; padding: 20px 0; }
+  .timer-time { font-size: 64px; font-weight: 800; font-variant-numeric: tabular-nums; }
+  .timer-time.focus { color: var(--accent); }
+  .timer-time.break { color: var(--green); }
+  .timer-time.plan { color: var(--purple); }
+  .timer-time.done { color: var(--warn); }
+  .timer-label { font-size: 14px; color: var(--muted); margin-top: 4px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+  .timer-sublabel { font-size: 12px; color: var(--muted); margin-top: 6px; opacity: 0.7; font-style: italic; }
+  .timer-btns { display: flex; gap: 8px; justify-content: center; margin-top: 16px; }
+  .timer-btn { padding: 12px 28px; border-radius: 10px; border: none; cursor: pointer; font-weight: 700; font-size: 14px; transition: all 0.2s; }
+  .timer-btn.start { background: var(--accent); color: var(--bg); }
+  .timer-btn.start:hover { background: var(--accentDim); }
+  .timer-btn.pause { background: var(--warn); color: var(--bg); }
+  .timer-btn.reset { background: transparent; border: 1px solid var(--border); color: var(--muted); }
+  .timer-btn.reset:hover { color: var(--text); border-color: var(--muted); }
+  .timer-progress { width: 100%; height: 6px; background: var(--border); border-radius: 3px; margin-top: 16px; overflow: hidden; }
+  .timer-progress-bar { height: 100%; border-radius: 3px; transition: width 1s linear; }
+  .timer-progress-bar.focus { background: var(--accent); }
+  .timer-progress-bar.break { background: var(--green); }
+  .timer-progress-bar.plan { background: var(--purple); }
+  .timer-rounds { display: flex; gap: 6px; justify-content: center; margin-top: 12px; }
+  .timer-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--border); }
+  .timer-dot.done { background: var(--accent); }
+  .phase-bar { display: flex; gap: 4px; margin-top: 14px; border-radius: 8px; overflow: hidden; }
+  .phase-seg { padding: 6px 0; text-align: center; font-size: 10px; font-weight: 700; }
+  .phase-seg.f { background: rgba(56,189,248,0.15); color: var(--accent); flex: 45; }
+  .phase-seg.b { background: rgba(34,197,94,0.15); color: var(--green); flex: 5; }
+  .phase-seg.p { background: rgba(167,139,250,0.15); color: var(--purple); flex: 5; }
+  .phase-seg.current { outline: 2px solid; outline-offset: -2px; }
+  .reward-tier { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--border); }
+  .reward-tier:last-child { border-bottom: none; }
+  .reward-badge { font-size: 28px; min-width: 40px; text-align: center; }
+  .reward-info .r-title { font-size: 13px; font-weight: 700; color: var(--text); }
+  .reward-info .r-unlock { font-size: 11px; color: var(--accent); margin-top: 1px; }
+  .reward-info .r-desc { font-size: 12px; color: var(--muted); margin-top: 3px; line-height: 1.45; }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <div class="icon">🧠</div>
+    <h1>FOCUS FRAMEWORK</h1>
+    <p>Your brain is smarter than the content creator algorithm. Train it.</p>
+  </div>
+
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab('guide')">Framework</button>
+    <button class="tab-btn" onclick="switchTab('timer')">Timer</button>
+    <button class="tab-btn" onclick="switchTab('breaks')">Breaks</button>
+    <button class="tab-btn" onclick="switchTab('rewards')">Rewards</button>
+    <button class="tab-btn" onclick="switchTab('tips')">Tips</button>
+    <button class="tab-btn" onclick="switchTab('offline')">Go Offline</button>
+    <button class="tab-btn" onclick="switchTab('tracker')">Tracker</button>
+  </div>
+
+  <!-- GUIDE TAB -->
+  <div id="tab-guide" class="tab-content active">
+    <div class="card">
+      <h2 style="font-size:15px;color:var(--accent);margin-bottom:4px;">The 45 / 5 / 5 Rule</h2>
+      <p class="card-text">45 minutes of focused work → 5 minutes of real rest → 5 minutes planning your next task → repeat. Simple. Powerful. No phone involved.</p>
+      <div class="phase-bar">
+        <div class="phase-seg f">45 min FOCUS</div>
+        <div class="phase-seg b">5 min REST</div>
+        <div class="phase-seg p">5 min PLAN</div>
+      </div>
+    </div>
+
+    <div class="card"><div class="step-row"><div class="step-icon">📱➡️🚪</div><div><div class="card-title">Step 0 — Phone Leaves the Room</div><p class="card-text">Not on silent. Not face down. In another room. This is the single most important step. No negotiation.</p></div></div></div>
+    <div class="card"><div class="step-row"><div class="step-icon">🎯</div><div><div class="card-title">Step 1 — Pick ONE Task</div><p class="card-text">Not "study math." Something specific: "Solve exercises 4-8 from Chapter 6." Small and clear beats big and vague.</p></div></div></div>
+    <div class="card"><div class="step-row"><div class="step-icon">⏱️</div><div><div class="card-title">Step 2 — Set a 45-Minute Timer</div><p class="card-text">Use the Timer tab, a wall clock, or a kitchen timer. Not your phone. 45 minutes — that's it. Not forever.</p></div></div></div>
+    <div class="card"><div class="step-row"><div class="step-icon">🔥</div><div><div class="card-title">Step 3 — Work Through the Friction</div><p class="card-text">Around 10-15 mins in, your brain will scream for a distraction. This is normal. It passes in about 2 minutes if you don't feed it. Push through — this is where real learning happens.</p></div></div></div>
+    <div class="card"><div class="step-row"><div class="step-icon">🌿</div><div><div class="card-title">Step 4 — Take a REAL 5-Min Break</div><p class="card-text">Timer rings → stand up, walk around, stretch, drink water, look out the window. No screens. Let your brain actually rest.</p></div></div></div>
+    <div class="card"><div class="step-row"><div class="step-icon">📋</div><div><div class="card-title">Step 5 — Plan the Next Task (5 min)</div><p class="card-text">Before diving back in, take 5 minutes to write down exactly what you'll work on next. "What's the one thing I need to do in the next 45 minutes?" This removes decision paralysis when the next round starts.</p></div></div></div>
+    <div class="card"><div class="step-row"><div class="step-icon">🔁</div><div><div class="card-title">Step 6 — Repeat & Reward</div><p class="card-text">Go again. 2-3 rounds = 90-135 mins of real focused work. That's more than most students get in an entire evening. Check the Rewards tab for how to celebrate your wins.</p></div></div></div>
+
+    <div class="info-box warn">
+      <p class="info-title">⚡ The Math That Matters</p>
+      <p class="card-text">2 focused rounds = ~1.5 hours of real work.<br>3 hours of "studying" with your phone nearby = maybe 30 mins of actual focus.<br><strong style="color:var(--text)">Less time. Better results. More free time after.</strong></p>
+    </div>
+  </div>
+
+  <!-- TIMER TAB -->
+  <div id="tab-timer" class="tab-content">
+    <div class="card" style="padding:20px;">
+      <div class="timer-display">
+        <div id="timer-time" class="timer-time focus">45:00</div>
+        <div id="timer-label" class="timer-label">Focus Time</div>
+        <div id="timer-sublabel" class="timer-sublabel">Head down. Phone away. Let's go.</div>
+        <div class="timer-progress"><div id="timer-bar" class="timer-progress-bar focus" style="width:100%"></div></div>
+        <div class="phase-bar" style="margin-top:12px;">
+          <div id="ps-f" class="phase-seg f current">45 FOCUS</div>
+          <div id="ps-b" class="phase-seg b">5 REST</div>
+          <div id="ps-p" class="phase-seg p">5 PLAN</div>
+        </div>
+        <div id="timer-rounds" class="timer-rounds"></div>
+      </div>
+      <div class="timer-btns">
+        <button id="btn-start" class="timer-btn start" onclick="toggleTimer()">Start</button>
+        <button class="timer-btn reset" onclick="resetTimer()">Reset</button>
+      </div>
+    </div>
+    <div class="card" style="margin-top:14px;">
+      <p class="card-text" style="text-align:center;">💡 <strong style="color:var(--text)">Tip:</strong> Keep this open on your laptop while your phone is in another room. The timer beeps when each phase ends — focus, rest, and planning.</p>
+    </div>
+  </div>
+
+  <!-- BREAKS TAB -->
+  <div id="tab-breaks" class="tab-content">
+    <div class="info-box red">
+      <p class="info-title">❌ Fake Breaks (feel like rest, aren't)</p>
+      <div class="info-item"><div class="info-item-title">Scrolling Reels / Shorts / TikTok</div><div class="info-item-desc">Rapid-fire dopamine — brain works harder, not less</div></div>
+      <div class="info-item"><div class="info-item-title">Watching YouTube videos</div><div class="info-item-desc">New information overload, no recovery</div></div>
+      <div class="info-item"><div class="info-item-title">Texting / group chats</div><div class="info-item-desc">Social processing is still mental work</div></div>
+      <div class="info-item"><div class="info-item-title">Browsing online shops or feeds</div><div class="info-item-desc">Decision fatigue disguised as relaxation</div></div>
+      <div class="info-item"><div class="info-item-title">Watching TV shows or series</div><div class="info-item-desc">One episode turns into three — your brain is processing storylines, not resting</div></div>
+      <div class="info-item"><div class="info-item-title">Watching brain rots or toxic news or political debates</div><div class="info-item-desc">Fills your head with stress, outrage, and opinions that drain focus even more than studying did</div></div>
+    </div>
+
+    <div class="info-box green">
+      <p class="info-title">✅ Real Breaks (actually recharge you)</p>
+      <div class="info-item"><div class="info-item-title">Walk to the kitchen, drink water</div><div class="info-item-desc">Movement + hydration resets attention</div></div>
+      <div class="info-item"><div class="info-item-title">Step outside for 2 minutes</div><div class="info-item-desc">Fresh air + distance from the desk</div></div>
+      <div class="info-item"><div class="info-item-title">Stretch or do 10 jumping jacks</div><div class="info-item-desc">Gets blood flowing to the brain</div></div>
+      <div class="info-item"><div class="info-item-title">Stare out a window or at the ceiling</div><div class="info-item-desc">Feels boring — that's how you know it's working</div></div>
+      <div class="info-item"><div class="info-item-title">Look at a painting and imagine a story</div><div class="info-item-desc">Study the details, invent a backstory, and plan to tell it to your cousin next time you meet</div></div>
+      <div class="info-item"><div class="info-item-title">Splash water on your face</div><div class="info-item-desc">Quick sensory reset</div></div>
+      <div class="info-item"><div class="info-item-title">Draw or sketch something for 5 minutes</div><div class="info-item-desc">Doodle, shade a portion of a painting, colour — uses a totally different part of your brain and feels rewarding</div></div>
+      <div class="info-item"><div class="info-item-title">Organize your desk — remove clutter</div><div class="info-item-desc">A clean space calms the mind. Toss wrappers, stack books, clear the chaos. Takes 3 minutes, feels amazing.</div></div>
+      <div class="info-item"><div class="info-item-title">Prep for tomorrow — uniform, tiffin, clothes</div><div class="info-item-desc">Lay out your school uniform, pack your tiffin box, pick 2 outfits. Future-you will thank present-you.</div></div>
+    </div>
+
+    <div class="info-box purple">
+      <p class="info-title">📋 Planning Break (the secret weapon)</p>
+      <p class="card-text" style="margin-bottom:8px;">The 5-minute planning phase is what separates this from ordinary study. Here's what to do:</p>
+      <div class="info-item"><div class="info-item-title">Write down what you just finished</div><div class="info-item-desc">One line — "Completed Ch.6 problems 4-8." Gives you a sense of progress.</div></div>
+      <div class="info-item"><div class="info-item-title">Identify exactly what's next</div><div class="info-item-desc">Be specific: "Read pages 50-55 and highlight key terms" not "do more biology."</div></div>
+      <div class="info-item"><div class="info-item-title">Note anything you're stuck on</div><div class="info-item-desc">Write it down so it doesn't drain mental energy during the next round.</div></div>
+    </div>
+
+    <div class="accent-card">
+      <p class="key">🔑 The Test</p>
+      <p class="card-text" style="margin-top:6px;">After your break, do you feel ready to work again — or do you want more break? If you want more, it wasn't a real break. It was entertainment your brain is now craving more of.</p>
+    </div>
+  </div>
+
+  <!-- REWARDS TAB -->
+  <div id="tab-rewards" class="tab-content">
+    <div class="card">
+      <h2 style="font-size:15px;color:var(--warn);margin-bottom:4px;">🏆 Why Rewards Matter</h2>
+      <p class="card-text">Your brain learns to repeat behaviours that feel rewarding. If studying always ends in guilt or exhaustion, your brain will avoid it. If it ends with something genuinely enjoyable, your brain starts associating focus with good outcomes. The trick: rewards must come <strong style="color:var(--text)">after</strong> the work, never during.</p>
+    </div>
+
+    <div class="card">
+      <h3 style="font-size:14px;font-weight:700;margin-bottom:12px;color:var(--accent);">Reward Tiers — Earn as You Go</h3>
+      <div class="reward-tier">
+        <div class="reward-badge">⭐</div>
+        <div class="reward-info">
+          <div class="r-title">After 1 Block (45 min)</div>
+          <div class="r-unlock">Quick wins — you earned a small treat</div>
+          <div class="r-desc">A favourite snack, 10 minutes of a show, play one song loud, doodle for fun, make yourself a nice drink.</div>
+        </div>
+      </div>
+      <div class="reward-tier">
+        <div class="reward-badge">🌟</div>
+        <div class="reward-info">
+          <div class="r-title">After 2 Blocks (~2 hrs)</div>
+          <div class="r-unlock">Medium reward — you've done real work</div>
+          <div class="r-desc">Call your favourite friend or cousin, play a quick game, go for a walk with music, tidy up your bag or desk for tomorrow, have dessert.</div>
+        </div>
+      </div>
+      <div class="reward-tier">
+        <div class="reward-badge">🔥</div>
+        <div class="reward-info">
+          <div class="r-title">After 3 Blocks (~3 hrs)</div>
+          <div class="r-unlock">Big reward — that's a serious study session</div>
+          <div class="r-desc">A full episode of your favourite show, 30 min of gaming, go out with friends, order something you've wanted online.</div>
+        </div>
+      </div>
+      <div class="reward-tier">
+        <div class="reward-badge">💎</div>
+        <div class="reward-info">
+          <div class="r-title">Weekly Streak (5+ days)</div>
+          <div class="r-unlock">The big one — consistency deserves celebration</div>
+          <div class="r-desc">Movie night, a new book or game, a meal out, a full free afternoon with zero guilt — you earned every second.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-box warn">
+      <p class="info-title">💡 Smart Reward Rules</p>
+      <div class="info-item"><div class="info-item-title">Reward AFTER, never during</div><div class="info-item-desc">"I'll watch this after 2 blocks" works. "I'll watch while studying" destroys focus.</div></div>
+      <div class="info-item"><div class="info-item-title">Decide the reward before you start</div><div class="info-item-desc">Knowing what's waiting for you makes it easier to push through the hard parts.</div></div>
+      <div class="info-item"><div class="info-item-title">Time-box screen rewards</div><div class="info-item-desc">If the reward is gaming or YouTube, set a timer for that too. 30 min of guilt-free fun, then stop.</div></div>
+      <div class="info-item"><div class="info-item-title">Physical rewards hit different</div><div class="info-item-desc">A walk, a snack, a shower, shooting hoops — these feel more rewarding than screens after deep focus.</div></div>
+      <div class="info-item"><div class="info-item-title">Never skip the reward</div><div class="info-item-desc">If you did the work, take the reward. Skipping it teaches your brain that effort doesn't pay off.</div></div>
+    </div>
+
+    <div class="accent-card">
+      <p class="key">🧠 The Science</p>
+      <p class="card-text" style="margin-top:6px;">Dopamine (the "motivation chemical") doesn't just respond to pleasure — it responds to <strong style="color:var(--text)">anticipated</strong> pleasure. When you pair focused work with a reliable reward afterward, your brain starts releasing dopamine <em>before</em> you even sit down to study. You're literally rewiring yourself to want to focus.</p>
+    </div>
+  </div>
+
+  <!-- TIPS TAB -->
+  <div id="tab-tips" class="tab-content">
+    <div class="card"><div class="card-title">🧠 The Friction Moment Is Normal</div><p class="card-text">About 10-15 minutes into hard work, your brain creates an urgent "I need a break" feeling. This is not exhaustion — it's your brain testing whether you'll give it easy dopamine. If you ride it out for ~2 minutes, it fades and focus deepens.</p></div>
+    <div class="card"><div class="card-title">🎮 You're Being Played</div><p class="card-text">Short-form video apps hire hundreds of engineers whose only job is to keep you scrolling. The algorithm studies what makes YOU specifically unable to stop. It's not a fair fight — so don't fight it. Remove the option entirely during study time.</p></div>
+    <div class="card"><div class="card-title">📝 Be Specific About Tasks</div><p class="card-text">"Study biology" → brain panics, doesn't know where to start, reaches for phone. "Read pages 42-48 and write 5 bullet points" → brain has a clear path. Specific tasks feel less overwhelming.</p></div>
+    <div class="card"><div class="card-title">🏆 Track Your Wins</div><p class="card-text">Each completed 45-minute block is a win. Use the Tracker tab or a simple tally on paper. Seeing your streaks builds momentum and makes the next session easier to start.</p></div>
+    <div class="card"><div class="card-title">😤 Bad Sessions Still Count</div><p class="card-text">A 45-minute block where you struggled and felt confused is still better than 3 hours of scrolling. Learning feels uncomfortable. That's not a sign it's not working — it's the sign that it IS.</p></div>
+    <div class="card"><div class="card-title">🕐 Start With Just One Block</div><p class="card-text">Don't promise yourself 3 hours. Promise yourself one 45-minute block. That's it. After that, decide if you want another. Most of the time, starting is the hardest part.</p></div>
+    <div class="card"><div class="card-title">📋 Planning Prevents Procrastination</div><p class="card-text">The 5-minute planning phase isn't wasted time — it's what stops you from opening your phone "just to figure out what to do next." When the next round starts and you already know exactly what to work on, there's no gap for distraction to sneak in.</p></div>
+  </div>
+
+  <!-- GO OFFLINE TAB -->
+  <div id="tab-offline" class="tab-content">
+    <div class="card">
+      <h2 style="font-size:15px;color:var(--accent);margin-bottom:4px;">✈️ Go Offline on Your Mac</h2>
+      <p class="card-text">Macs don't have a single "Airplane Mode" button like iPhones. But you can go fully offline in seconds by turning off Wi-Fi and Bluetooth manually. Do this before every study session.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-title" style="color:var(--accent);">Method 1 — Menu Bar (Fastest)</div>
+      <div class="info-item"><div class="info-item-title">Step 1: Turn off Wi-Fi</div><div class="info-item-desc">Click the <strong style="color:var(--text)">Wi-Fi icon</strong> in the top-right corner of your screen → Toggle the switch <strong style="color:var(--text)">OFF</strong>. The icon will appear with a slash through it.</div></div>
+      <div class="info-item"><div class="info-item-title">Step 2: Turn off Bluetooth</div><div class="info-item-desc">Click the <strong style="color:var(--text)">Control Center icon</strong> (looks like two sliders) in the top-right → Click <strong style="color:var(--text)">Bluetooth</strong> → Toggle it <strong style="color:var(--text)">OFF</strong>.</div></div>
+      <div class="info-item"><div class="info-item-title">Done!</div><div class="info-item-desc">You're now fully offline. No notifications, no temptation, no distractions. This page still works — it's already loaded.</div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-title" style="color:var(--purple);">Method 2 — System Settings</div>
+      <div class="info-item"><div class="info-item-title">Step 1:</div><div class="info-item-desc">Click the <strong style="color:var(--text)">Apple menu </strong> (top-left corner) → Select <strong style="color:var(--text)">System Settings</strong>.</div></div>
+      <div class="info-item"><div class="info-item-title">Step 2:</div><div class="info-item-desc">Click <strong style="color:var(--text)">Wi-Fi</strong> in the sidebar → Toggle the switch <strong style="color:var(--text)">OFF</strong>.</div></div>
+      <div class="info-item"><div class="info-item-title">Step 3:</div><div class="info-item-desc">Click <strong style="color:var(--text)">Bluetooth</strong> in the sidebar → Toggle the switch <strong style="color:var(--text)">OFF</strong>.</div></div>
+    </div>
+
+    <div class="info-box warn">
+      <p class="info-title">⏰ Make It a Ritual</p>
+      <div class="info-item"><div class="info-item-title">Before every study session:</div><div class="info-item-desc">1. Phone goes in another room<br>2. Open this Focus page on your laptop<br>3. Turn off Wi-Fi and Bluetooth (takes 5 seconds)<br>4. Start the timer<br><br>When you're done studying, just reverse the steps to go back online.</div></div>
+    </div>
+
+    <div class="accent-card">
+      <p class="key">💡 Why This Works</p>
+      <p class="card-text" style="margin-top:6px;">Going offline removes the <em>possibility</em> of distraction, so your brain stops wasting energy resisting it. You don't need willpower to avoid YouTube if YouTube literally can't load. Save your willpower for the hard problems.</p>
+    </div>
+  </div>
+
+  <!-- TRACKER TAB -->
+  <div id="tab-tracker" class="tab-content">
+    <div class="card tracker-count">
+      <div class="label">Completed Blocks</div>
+      <div id="streak-num" class="num">0</div>
+      <div id="streak-msg" class="msg">Complete your first 45-min block!</div>
+    </div>
+
+    <div class="card">
+      <p style="font-size:13px;font-weight:700;margin-bottom:10px;">Log a Completed Block</p>
+      <input type="text" id="session-input" placeholder="What did you work on? (e.g. Math Ch.6)">
+      <div class="btn-row">
+        <button class="btn-primary" onclick="addSession()">✓ Log Block</button>
+        <button class="btn-secondary" id="clear-btn" style="display:none;" onclick="clearSessions()">Clear All</button>
+      </div>
+    </div>
+
+    <div id="session-list"></div>
+    <div id="empty-state" class="empty">
+      <p>No blocks logged yet.</p>
+      <p style="font-size:12px;">Complete a 45-minute focused session and log it here!</p>
+    </div>
+  </div>
+
+  <p class="footer">Made for focused students — not for algorithms</p>
+</div>
+
+<script>
+// --- Tab Switching ---
+const tabNames = ['guide','timer','breaks','rewards','tips','offline','tracker'];
+function switchTab(id) {
+  document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  document.querySelectorAll('.tab-btn')[tabNames.indexOf(id)].classList.add('active');
+}
+
+// --- Session Tracker ---
+let sessions = [];
+try { sessions = JSON.parse(localStorage.getItem('focus_sessions') || '[]'); } catch(e) { sessions = []; }
+renderSessions();
+
+function addSession() {
+  const input = document.getElementById('session-input');
+  const val = input.value.trim() || 'Focused session';
+  const now = new Date();
+  sessions.unshift({
+    name: val,
+    time: now.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'}),
+    day: now.toLocaleDateString([], {weekday:'short',month:'short',day:'numeric'})
+  });
+  try { localStorage.setItem('focus_sessions', JSON.stringify(sessions)); } catch(e) {}
+  input.value = '';
+  renderSessions();
+}
+
+function clearSessions() {
+  sessions = [];
+  try { localStorage.setItem('focus_sessions', JSON.stringify(sessions)); } catch(e) {}
+  renderSessions();
+}
+
+function renderSessions() {
+  const list = document.getElementById('session-list');
+  const empty = document.getElementById('empty-state');
+  const num = document.getElementById('streak-num');
+  const msg = document.getElementById('streak-msg');
+  const clearBtn = document.getElementById('clear-btn');
+
+  num.textContent = sessions.length;
+  num.className = sessions.length > 0 ? 'num has-sessions' : 'num';
+  clearBtn.style.display = sessions.length > 0 ? 'block' : 'none';
+
+  if (sessions.length === 0) msg.textContent = "Complete your first 45-min block!";
+  else if (sessions.length < 5) msg.textContent = "Building momentum — keep going!";
+  else if (sessions.length < 15) msg.textContent = "Solid streak! Your focus is growing 💪";
+  else msg.textContent = "You're a focus machine 🔥";
+
+  if (sessions.length === 0) { list.innerHTML = ''; empty.style.display = 'block'; return; }
+  empty.style.display = 'none';
+  list.innerHTML = sessions.map(s => `
+    <div class="session-entry">
+      <div><div class="name">✅ ${s.name}</div><div class="time">${s.day} at ${s.time}</div></div>
+      <span class="dur">45 min</span>
+    </div>`).join('');
+}
+
+// --- Timer (45 / 5 / 5) ---
+const FOCUS_SECS = 45 * 60;
+const BREAK_SECS = 5 * 60;
+const PLAN_SECS = 5 * 60;
+const TOTAL_ROUNDS = 3;
+
+let timerInterval = null;
+let remaining = FOCUS_SECS;
+let phase = 'focus'; // 'focus' | 'break' | 'plan' | 'done'
+let running = false;
+let currentRound = 1;
+
+const sublabels = {
+  focus: "Head down. Phone away. Let's go.",
+  break: "Stand up. Stretch. Drink water. No screens.",
+  plan: "Write down exactly what you'll tackle next.",
+  done: "You crushed it. Go claim your reward!"
+};
+
+function renderRounds() {
+  const el = document.getElementById('timer-rounds');
+  let html = '';
+  for (let i = 1; i <= TOTAL_ROUNDS; i++) {
+    html += '<div class="timer-dot ' + (i < currentRound ? 'done' : '') + '"></div>';
+  }
+  el.innerHTML = html;
+}
+renderRounds();
+
+function highlightPhase() {
+  document.getElementById('ps-f').className = 'phase-seg f' + (phase === 'focus' ? ' current' : '');
+  document.getElementById('ps-b').className = 'phase-seg b' + (phase === 'break' ? ' current' : '');
+  document.getElementById('ps-p').className = 'phase-seg p' + (phase === 'plan' ? ' current' : '');
+}
+
+function updateTimerDisplay() {
+  const m = Math.floor(remaining / 60);
+  const s = remaining % 60;
+  const timeEl = document.getElementById('timer-time');
+  const labelEl = document.getElementById('timer-label');
+  const subEl = document.getElementById('timer-sublabel');
+  const barEl = document.getElementById('timer-bar');
+
+  timeEl.textContent = String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+  timeEl.className = 'timer-time ' + phase;
+  barEl.className = 'timer-progress-bar ' + phase;
+
+  let total = phase === 'focus' ? FOCUS_SECS : phase === 'break' ? BREAK_SECS : PLAN_SECS;
+  barEl.style.width = (remaining / total * 100) + '%';
+
+  if (phase === 'focus') labelEl.textContent = 'Focus Time — Round ' + currentRound + '/' + TOTAL_ROUNDS;
+  else if (phase === 'break') labelEl.textContent = 'Rest Break';
+  else if (phase === 'plan') labelEl.textContent = 'Plan Next Task';
+  else labelEl.textContent = 'Session Complete!';
+
+  subEl.textContent = sublabels[phase] || '';
+  highlightPhase();
+}
+
+function playBeep() {
+  try {
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    function beep(freq, start, dur) {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.connect(gain); gain.connect(ctx.destination);
+      osc.frequency.value = freq; osc.type = 'sine';
+      gain.gain.setValueAtTime(0.3, ctx.currentTime + start);
+      gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + start + dur);
+      osc.start(ctx.currentTime + start);
+      osc.stop(ctx.currentTime + start + dur);
+    }
+    beep(660, 0, 0.2); beep(880, 0.25, 0.2); beep(660, 0.5, 0.3);
+  } catch(e) {}
+}
+
+function playDoneSound() {
+  try {
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    function beep(freq, start, dur) {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.connect(gain); gain.connect(ctx.destination);
+      osc.frequency.value = freq; osc.type = 'sine';
+      gain.gain.setValueAtTime(0.3, ctx.currentTime + start);
+      gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + start + dur);
+      osc.start(ctx.currentTime + start);
+      osc.stop(ctx.currentTime + start + dur);
+    }
+    beep(523, 0, 0.15); beep(659, 0.18, 0.15); beep(784, 0.36, 0.15); beep(1047, 0.54, 0.3);
+  } catch(e) {}
+}
+
+function tick() {
+  if (remaining <= 0) {
+    if (phase === 'focus') {
+      playBeep();
+      phase = 'break';
+      remaining = BREAK_SECS;
+    } else if (phase === 'break') {
+      playBeep();
+      phase = 'plan';
+      remaining = PLAN_SECS;
+    } else if (phase === 'plan') {
+      if (currentRound >= TOTAL_ROUNDS) {
+        playDoneSound();
+        phase = 'done';
+        running = false;
+        clearInterval(timerInterval);
+        timerInterval = null;
+        document.getElementById('btn-start').textContent = 'Done!';
+        document.getElementById('btn-start').className = 'timer-btn reset';
+        document.getElementById('timer-time').textContent = '🎉';
+        document.getElementById('timer-label').textContent = 'All 3 rounds complete! Go claim your reward!';
+        document.getElementById('timer-sublabel').textContent = sublabels.done;
+        highlightPhase();
+        return;
+      }
+      playBeep();
+      currentRound++;
+      renderRounds();
+      phase = 'focus';
+      remaining = FOCUS_SECS;
+    }
+    updateTimerDisplay();
+    return;
+  }
+  remaining--;
+  updateTimerDisplay();
+}
+
+function toggleTimer() {
+  if (phase === 'done') return;
+  if (running) {
+    running = false;
+    clearInterval(timerInterval);
+    timerInterval = null;
+    document.getElementById('btn-start').textContent = 'Resume';
+    document.getElementById('btn-start').className = 'timer-btn start';
+  } else {
+    running = true;
+    timerInterval = setInterval(tick, 1000);
+    document.getElementById('btn-start').textContent = 'Pause';
+    document.getElementById('btn-start').className = 'timer-btn pause';
+  }
+}
+
+function resetTimer() {
+  running = false;
+  clearInterval(timerInterval);
+  timerInterval = null;
+  phase = 'focus';
+  remaining = FOCUS_SECS;
+  currentRound = 1;
+  renderRounds();
+  updateTimerDisplay();
+  document.getElementById('btn-start').textContent = 'Start';
+  document.getElementById('btn-start').className = 'timer-btn start';
+}
+
+updateTimerDisplay();
+</script>
+</body>
+</html>
