@@ -18,7 +18,7 @@
   .header h1 { font-size: 22px; font-weight: 700; color: var(--accent); margin: 0; }
   .header p { color: var(--muted); font-size: 13px; margin: 4px 0 0; }
   .tabs { display: flex; gap: 4px; margin-bottom: 24px; background: var(--card); border-radius: 10px; padding: 4px; flex-wrap: wrap; }
-  .tab-btn { flex: 1; padding: 8px 4px; border: none; border-radius: 8px; cursor: pointer; font-size: 11.5px; font-weight: 600; background: transparent; color: var(--muted); transition: all 0.2s; min-width: 70px; }
+  .tab-btn { flex: 1; padding: 8px 4px; border: none; border-radius: 8px; cursor: pointer; font-size: 11px; font-weight: 600; background: transparent; color: var(--muted); transition: all 0.2s; min-width: 60px; }
   .tab-btn.active { background: var(--accent); color: var(--bg); }
   .tab-btn:hover:not(.active) { color: var(--text); }
   .tab-content { display: none; }
@@ -56,6 +56,8 @@
   .btn-primary:hover { background: var(--accentDim); }
   .btn-secondary { padding: 10px 14px; border-radius: 8px; border: 1px solid var(--border); cursor: pointer; background: transparent; color: var(--muted); font-size: 12px; }
   .btn-secondary:hover { color: var(--text); border-color: var(--muted); }
+  .btn-danger { padding: 10px 14px; border-radius: 8px; border: 1px solid rgba(239,68,68,0.3); cursor: pointer; background: transparent; color: var(--red); font-size: 12px; }
+  .btn-danger:hover { background: rgba(239,68,68,0.1); }
   .session-entry { background: var(--card); border-radius: 10px; padding: 10px 14px; border: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
   .session-entry .name { font-size: 13px; font-weight: 600; }
   .session-entry .time { font-size: 11px; color: var(--muted); margin-top: 2px; }
@@ -97,9 +99,49 @@
   .reward-info .r-title { font-size: 13px; font-weight: 700; color: var(--text); }
   .reward-info .r-unlock { font-size: 11px; color: var(--accent); margin-top: 1px; }
   .reward-info .r-desc { font-size: 12px; color: var(--muted); margin-top: 3px; line-height: 1.45; }
+  /* Confirm dialog */
+  .confirm-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.6); z-index: 999; align-items: center; justify-content: center; }
+  .confirm-overlay.show { display: flex; }
+  .confirm-box { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 24px; max-width: 320px; width: 90%; text-align: center; }
+  .confirm-box p { font-size: 14px; margin-bottom: 16px; line-height: 1.5; }
+  .confirm-btns { display: flex; gap: 10px; justify-content: center; }
+  .confirm-btns button { padding: 10px 24px; border-radius: 8px; border: none; cursor: pointer; font-weight: 700; font-size: 13px; }
+  .confirm-yes { background: var(--red); color: white; }
+  .confirm-yes:hover { opacity: 0.85; }
+  .confirm-no { background: var(--border); color: var(--text); }
+  .confirm-no:hover { opacity: 0.85; }
+  /* Goals */
+  .goal-item { display: flex; align-items: center; gap: 10px; padding: 10px 14px; background: var(--card); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 6px; }
+  .goal-check { width: 20px; height: 20px; border-radius: 6px; border: 2px solid var(--border); cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.2s; }
+  .goal-check.checked { background: var(--green); border-color: var(--green); }
+  .goal-check.checked::after { content: '✓'; color: white; font-size: 12px; font-weight: 700; }
+  .goal-text { font-size: 13px; flex: 1; }
+  .goal-text.done { text-decoration: line-through; color: var(--muted); }
+  .goal-delete { cursor: pointer; color: var(--muted); font-size: 16px; padding: 0 4px; opacity: 0.5; }
+  .goal-delete:hover { color: var(--red); opacity: 1; }
+  .goal-progress { width: 100%; height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; margin-top: 8px; }
+  .goal-progress-bar { height: 100%; background: var(--green); border-radius: 4px; transition: width 0.3s; }
+  /* Email */
+  .email-card { background: var(--card); border-radius: 12px; padding: 16px; border: 1px solid var(--border); margin-top: 14px; }
+  .email-input { width: 100%; padding: 10px 12px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg); color: var(--text); font-size: 13px; margin-bottom: 10px; outline: none; }
+  .email-input:focus { border-color: var(--accent); }
+  .btn-email { width: 100%; padding: 12px 0; border-radius: 8px; border: none; cursor: pointer; background: var(--purple); color: white; font-weight: 700; font-size: 13px; }
+  .btn-email:hover { opacity: 0.85; }
+  .email-preview { background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 12px; margin-top: 10px; font-size: 12px; color: var(--muted); line-height: 1.6; white-space: pre-wrap; max-height: 300px; overflow-y: auto; }
 </style>
 </head>
 <body>
+
+<!-- Confirm Dialog -->
+<div id="confirm-dialog" class="confirm-overlay">
+  <div class="confirm-box">
+    <p id="confirm-msg">Are you sure?</p>
+    <div class="confirm-btns">
+      <button class="confirm-no" onclick="confirmNo()">No, Keep</button>
+      <button class="confirm-yes" onclick="confirmYes()">Yes, Clear</button>
+    </div>
+  </div>
+</div>
 
 <div class="container">
   <div class="header">
@@ -110,11 +152,12 @@
 
   <div class="tabs">
     <button class="tab-btn active" onclick="switchTab('guide')">Framework</button>
-    <button class="tab-btn" onclick="switchTab('timer')">Timer</button>
     <button class="tab-btn" onclick="switchTab('breaks')">Breaks</button>
     <button class="tab-btn" onclick="switchTab('rewards')">Rewards</button>
     <button class="tab-btn" onclick="switchTab('tips')">Tips</button>
     <button class="tab-btn" onclick="switchTab('offline')">Go Offline</button>
+    <button class="tab-btn" onclick="switchTab('timer')">Timer</button>
+    <button class="tab-btn" onclick="switchTab('goals')">Goals</button>
     <button class="tab-btn" onclick="switchTab('tracker')">Tracker</button>
   </div>
 
@@ -137,35 +180,11 @@
     <div class="card"><div class="step-row"><div class="step-icon">🌿</div><div><div class="card-title">Step 4 — Take a REAL 5-Min Break</div><p class="card-text">Timer rings → stand up, walk around, stretch, drink water, look out the window. No screens. Let your brain actually rest.</p></div></div></div>
     <div class="card"><div class="step-row"><div class="step-icon">📋</div><div><div class="card-title">Step 5 — Plan the Next Task (5 min)</div><p class="card-text">Before diving back in, take 5 minutes to write down exactly what you'll work on next. "What's the one thing I need to do in the next 45 minutes?" This removes decision paralysis when the next round starts.</p></div></div></div>
     <div class="card"><div class="step-row"><div class="step-icon">🔁</div><div><div class="card-title">Step 6 — Repeat & Reward</div><p class="card-text">Go again. 2-3 rounds = 90-135 mins of real focused work. That's more than most students get in an entire evening. Check the Rewards tab for how to celebrate your wins.</p></div></div></div>
+    <div class="card"><div class="step-row"><div class="step-icon">📧</div><div><div class="card-title">Step 7 — Showcase Your Progress</div><p class="card-text">Any time you want, send a snapshot of your weekly goals and study blocks to your tutor, parents, or yourself. Sharing progress keeps you accountable and makes your hard work visible. <span style="color:var(--accent);cursor:pointer;font-weight:600;" onclick="switchTab('email')">Open Update →</span></p></div></div></div>
 
     <div class="info-box warn">
       <p class="info-title">⚡ The Math That Matters</p>
       <p class="card-text">2 focused rounds = ~1.5 hours of real work.<br>3 hours of "studying" with your phone nearby = maybe 30 mins of actual focus.<br><strong style="color:var(--text)">Less time. Better results. More free time after.</strong></p>
-    </div>
-  </div>
-
-  <!-- TIMER TAB -->
-  <div id="tab-timer" class="tab-content">
-    <div class="card" style="padding:20px;">
-      <div class="timer-display">
-        <div id="timer-time" class="timer-time focus">45:00</div>
-        <div id="timer-label" class="timer-label">Focus Time</div>
-        <div id="timer-sublabel" class="timer-sublabel">Head down. Phone away. Let's go.</div>
-        <div class="timer-progress"><div id="timer-bar" class="timer-progress-bar focus" style="width:100%"></div></div>
-        <div class="phase-bar" style="margin-top:12px;">
-          <div id="ps-f" class="phase-seg f current">45 FOCUS</div>
-          <div id="ps-b" class="phase-seg b">5 REST</div>
-          <div id="ps-p" class="phase-seg p">5 PLAN</div>
-        </div>
-        <div id="timer-rounds" class="timer-rounds"></div>
-      </div>
-      <div class="timer-btns">
-        <button id="btn-start" class="timer-btn start" onclick="toggleTimer()">Start</button>
-        <button class="timer-btn reset" onclick="resetTimer()">Reset</button>
-      </div>
-    </div>
-    <div class="card" style="margin-top:14px;">
-      <p class="card-text" style="text-align:center;">💡 <strong style="color:var(--text)">Tip:</strong> Keep this open on your laptop while your phone is in another room. The timer beeps when each phase ends — focus, rest, and planning.</p>
     </div>
   </div>
 
@@ -221,24 +240,24 @@
         <div class="reward-badge">⭐</div>
         <div class="reward-info">
           <div class="r-title">After 1 Block (45 min)</div>
-          <div class="r-unlock">Quick wins — you earned a small treat</div>
-          <div class="r-desc">A favourite snack, 10 minutes of a show, play one song loud, doodle for fun, make yourself a nice drink.</div>
+          <div class="r-unlock">First reward = real rest. Always.</div>
+          <div class="r-desc">Take your 5-min real break — stretch, walk, water, fresh air. Then treat yourself: a favourite snack, play one song loud, doodle for fun, make yourself a nice drink.</div>
         </div>
       </div>
       <div class="reward-tier">
         <div class="reward-badge">🌟</div>
         <div class="reward-info">
           <div class="r-title">After 2 Blocks (~2 hrs)</div>
-          <div class="r-unlock">Medium reward — you've done real work</div>
-          <div class="r-desc">Call your favourite friend or cousin, play a quick game, go for a walk with music, tidy up your bag or desk for tomorrow, have dessert.</div>
+          <div class="r-unlock">Rest first, then a medium reward</div>
+          <div class="r-desc">Take a proper break — go outside, breathe, move your body. Then: call your favourite friend or cousin, play a quick game, go for a walk with music, tidy up your bag or desk for tomorrow, have dessert.</div>
         </div>
       </div>
       <div class="reward-tier">
         <div class="reward-badge">🔥</div>
         <div class="reward-info">
           <div class="r-title">After 3 Blocks (~3 hrs)</div>
-          <div class="r-unlock">Big reward — that's a serious study session</div>
-          <div class="r-desc">A full episode of your favourite show, 30 min of gaming, go out with friends, order something you've wanted online.</div>
+          <div class="r-unlock">You've earned serious rest + a big reward</div>
+          <div class="r-desc">Rest your mind fully first — you've worked hard. Then ask yourself what you'd like to do — define a new time-boxed reward for yourself, 30 min of gaming, go out with friends, order something you've wanted online.</div>
         </div>
       </div>
       <div class="reward-tier">
@@ -255,7 +274,7 @@
       <p class="info-title">💡 Smart Reward Rules</p>
       <div class="info-item"><div class="info-item-title">Reward AFTER, never during</div><div class="info-item-desc">"I'll watch this after 2 blocks" works. "I'll watch while studying" destroys focus.</div></div>
       <div class="info-item"><div class="info-item-title">Decide the reward before you start</div><div class="info-item-desc">Knowing what's waiting for you makes it easier to push through the hard parts.</div></div>
-      <div class="info-item"><div class="info-item-title">Time-box screen rewards</div><div class="info-item-desc">If the reward is gaming or YouTube, set a timer for that too. 30 min of guilt-free fun, then stop.</div></div>
+      <div class="info-item"><div class="info-item-title">Time-box screen rewards</div><div class="info-item-desc">If the reward is gaming or a show, set a timer for that too. 30 min of guilt-free fun, then stop.</div></div>
       <div class="info-item"><div class="info-item-title">Physical rewards hit different</div><div class="info-item-desc">A walk, a snack, a shower, shooting hoops — these feel more rewarding than screens after deep focus.</div></div>
       <div class="info-item"><div class="info-item-title">Never skip the reward</div><div class="info-item-desc">If you did the work, take the reward. Skipping it teaches your brain that effort doesn't pay off.</div></div>
     </div>
@@ -309,6 +328,62 @@
     </div>
   </div>
 
+  <!-- TIMER TAB -->
+  <div id="tab-timer" class="tab-content">
+    <div class="card" style="padding:20px;">
+      <div class="timer-display">
+        <div id="timer-time" class="timer-time focus">45:00</div>
+        <div id="timer-label" class="timer-label">Focus Time</div>
+        <div id="timer-sublabel" class="timer-sublabel">Head down. Phone away. Let's go.</div>
+        <div class="timer-progress"><div id="timer-bar" class="timer-progress-bar focus" style="width:100%"></div></div>
+        <div class="phase-bar" style="margin-top:12px;">
+          <div id="ps-f" class="phase-seg f current">45 FOCUS</div>
+          <div id="ps-b" class="phase-seg b">5 REST</div>
+          <div id="ps-p" class="phase-seg p">5 PLAN</div>
+        </div>
+        <div id="timer-rounds" class="timer-rounds"></div>
+      </div>
+      <div class="timer-btns">
+        <button id="btn-start" class="timer-btn start" onclick="toggleTimer()">Start</button>
+        <button class="timer-btn reset" onclick="resetTimer()">Reset</button>
+      </div>
+    </div>
+    <div class="card" style="margin-top:14px;">
+      <p class="card-text" style="text-align:center;">💡 <strong style="color:var(--text)">Tip:</strong> Keep this open on your laptop while your phone is in another room. The timer beeps when each phase ends — focus, rest, and planning.</p>
+    </div>
+  </div>
+
+  <!-- GOALS TAB -->
+  <div id="tab-goals" class="tab-content">
+    <div class="card">
+      <h2 style="font-size:15px;color:var(--warn);margin-bottom:4px;">🎯 Goals for the Week</h2>
+      <p class="card-text">Write down what you want to accomplish this week. Be specific. Check them off as you go.</p>
+    </div>
+
+    <div class="card">
+      <div id="goals-progress-wrap" style="display:none;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
+          <span style="font-size:12px;color:var(--muted);">Weekly Progress</span>
+          <span id="goals-progress-text" style="font-size:12px;font-weight:700;color:var(--green);">0/0</span>
+        </div>
+        <div class="goal-progress"><div id="goals-progress-bar" class="goal-progress-bar" style="width:0%"></div></div>
+        <div style="height:14px;"></div>
+      </div>
+      <p style="font-size:13px;font-weight:700;margin-bottom:10px;">Add a Goal</p>
+      <input type="text" id="goal-input" placeholder="e.g. Finish Math Chapter 7 exercises">
+      <div class="btn-row">
+        <button class="btn-primary" onclick="addGoal()">+ Add Goal</button>
+        <button class="btn-danger" id="goals-clear-btn" style="display:none;" onclick="showConfirm('goals')">Clear All</button>
+      </div>
+    </div>
+
+    <div id="goals-list"></div>
+    <div id="goals-empty" class="empty">
+      <p>No goals set yet.</p>
+      <p style="font-size:12px;">Add your weekly goals and check them off as you complete them!</p>
+    </div>
+  </div>
+
   <!-- TRACKER TAB -->
   <div id="tab-tracker" class="tab-content">
     <div class="card tracker-count">
@@ -322,7 +397,7 @@
       <input type="text" id="session-input" placeholder="What did you work on? (e.g. Math Ch.6)">
       <div class="btn-row">
         <button class="btn-primary" onclick="addSession()">✓ Log Block</button>
-        <button class="btn-secondary" id="clear-btn" style="display:none;" onclick="clearSessions()">Clear All</button>
+        <button class="btn-danger" id="clear-btn" style="display:none;" onclick="showConfirm('tracker')">Clear All</button>
       </div>
     </div>
 
@@ -333,17 +408,69 @@
     </div>
   </div>
 
+  <!-- EMAIL UPDATE TAB -->
+  <div id="tab-email" class="tab-content">
+    <div class="card">
+      <h2 style="font-size:15px;color:var(--purple);margin-bottom:4px;">📧 Send Weekly Update</h2>
+      <p class="card-text">Send a snapshot of your weekly goals and study tracker to your tutor, parents, or yourself. Stay accountable!</p>
+    </div>
+
+    <div class="card">
+      <p style="font-size:13px;font-weight:700;margin-bottom:10px;">Who should receive the update?</p>
+      <input type="text" id="email-to" class="email-input" placeholder="Email address (e.g. tutor@email.com)">
+      <input type="text" id="email-name" class="email-input" placeholder="Your name (e.g. Arjun)" style="margin-bottom:14px;">
+      <button class="btn-email" onclick="previewEmail()">📋 Preview Update</button>
+      <div id="email-preview-wrap" style="display:none;">
+        <div id="email-preview" class="email-preview"></div>
+        <div style="display:flex;gap:8px;margin-top:10px;">
+          <button class="btn-primary" onclick="sendEmail()" style="flex:1;">📧 Open in Email App</button>
+          <button class="btn-secondary" onclick="copyEmail()">📋 Copy</button>
+        </div>
+        <p id="email-copied" style="display:none;text-align:center;color:var(--green);font-size:12px;margin-top:6px;">Copied to clipboard!</p>
+      </div>
+    </div>
+
+    <div class="accent-card">
+      <p class="key">💡 How It Works</p>
+      <p class="card-text" style="margin-top:6px;">This generates a summary from your Goals and Tracker tabs and opens your email app with everything pre-filled. If you're offline, the email will sit in your outbox and send automatically when you reconnect.</p>
+    </div>
+  </div>
+
   <p class="footer">Made for focused students — not for algorithms</p>
 </div>
 
 <script>
 // --- Tab Switching ---
-const tabNames = ['guide','timer','breaks','rewards','tips','offline','tracker'];
+const tabNames = ['guide','breaks','rewards','tips','offline','timer','goals','tracker','email'];
 function switchTab(id) {
   document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
   document.getElementById('tab-' + id).classList.add('active');
   document.querySelectorAll('.tab-btn')[tabNames.indexOf(id)].classList.add('active');
+}
+
+// --- Confirm Dialog ---
+let confirmCallback = null;
+function showConfirm(type) {
+  const dialog = document.getElementById('confirm-dialog');
+  const msg = document.getElementById('confirm-msg');
+  if (type === 'tracker') {
+    msg.textContent = 'Clear all logged study blocks? This cannot be undone.';
+    confirmCallback = clearSessions;
+  } else if (type === 'goals') {
+    msg.textContent = 'Clear all weekly goals? This cannot be undone.';
+    confirmCallback = clearGoals;
+  }
+  dialog.classList.add('show');
+}
+function confirmYes() {
+  document.getElementById('confirm-dialog').classList.remove('show');
+  if (confirmCallback) confirmCallback();
+  confirmCallback = null;
+}
+function confirmNo() {
+  document.getElementById('confirm-dialog').classList.remove('show');
+  confirmCallback = null;
 }
 
 // --- Session Tracker ---
@@ -396,6 +523,72 @@ function renderSessions() {
     </div>`).join('');
 }
 
+// --- Goals ---
+let goals = [];
+try { goals = JSON.parse(localStorage.getItem('focus_goals') || '[]'); } catch(e) { goals = []; }
+renderGoals();
+
+function addGoal() {
+  const input = document.getElementById('goal-input');
+  const val = input.value.trim();
+  if (!val) return;
+  goals.push({ id: Date.now(), text: val, done: false });
+  try { localStorage.setItem('focus_goals', JSON.stringify(goals)); } catch(e) {}
+  input.value = '';
+  renderGoals();
+}
+
+function toggleGoal(id) {
+  const g = goals.find(g => g.id === id);
+  if (g) g.done = !g.done;
+  try { localStorage.setItem('focus_goals', JSON.stringify(goals)); } catch(e) {}
+  renderGoals();
+}
+
+function deleteGoal(id) {
+  goals = goals.filter(g => g.id !== id);
+  try { localStorage.setItem('focus_goals', JSON.stringify(goals)); } catch(e) {}
+  renderGoals();
+}
+
+function clearGoals() {
+  goals = [];
+  try { localStorage.setItem('focus_goals', JSON.stringify(goals)); } catch(e) {}
+  renderGoals();
+}
+
+function renderGoals() {
+  const list = document.getElementById('goals-list');
+  const empty = document.getElementById('goals-empty');
+  const clearBtn = document.getElementById('goals-clear-btn');
+  const progressWrap = document.getElementById('goals-progress-wrap');
+  const progressBar = document.getElementById('goals-progress-bar');
+  const progressText = document.getElementById('goals-progress-text');
+
+  clearBtn.style.display = goals.length > 0 ? 'block' : 'none';
+
+  if (goals.length === 0) {
+    list.innerHTML = '';
+    empty.style.display = 'block';
+    progressWrap.style.display = 'none';
+    return;
+  }
+
+  empty.style.display = 'none';
+  progressWrap.style.display = 'block';
+  const doneCount = goals.filter(g => g.done).length;
+  const pct = Math.round((doneCount / goals.length) * 100);
+  progressBar.style.width = pct + '%';
+  progressText.textContent = doneCount + '/' + goals.length + (pct === 100 ? ' 🎉' : '');
+
+  list.innerHTML = goals.map(g => `
+    <div class="goal-item">
+      <div class="goal-check ${g.done ? 'checked' : ''}" onclick="toggleGoal(${g.id})"></div>
+      <div class="goal-text ${g.done ? 'done' : ''}">${g.text}</div>
+      <div class="goal-delete" onclick="deleteGoal(${g.id})">×</div>
+    </div>`).join('');
+}
+
 // --- Timer (45 / 5 / 5) ---
 const FOCUS_SECS = 45 * 60;
 const BREAK_SECS = 5 * 60;
@@ -404,7 +597,7 @@ const TOTAL_ROUNDS = 3;
 
 let timerInterval = null;
 let remaining = FOCUS_SECS;
-let phase = 'focus'; // 'focus' | 'break' | 'plan' | 'done'
+let phase = 'focus';
 let running = false;
 let currentRound = 1;
 
@@ -557,6 +750,94 @@ function resetTimer() {
 }
 
 updateTimerDisplay();
+
+// --- Email Update ---
+function buildEmailBody() {
+  const name = document.getElementById('email-name').value.trim() || 'Student';
+  const now = new Date();
+  const dateStr = now.toLocaleDateString([], {weekday:'long', year:'numeric', month:'long', day:'numeric'});
+
+  let body = `FOCUS FRAMEWORK — Weekly Update\n`;
+  body += `From: ${name}\n`;
+  body += `Date: ${dateStr}\n`;
+  body += `${'─'.repeat(40)}\n\n`;
+
+  // Goals
+  body += `🎯 WEEKLY GOALS\n`;
+  body += `${'─'.repeat(40)}\n`;
+  if (goals.length === 0) {
+    body += `No goals set this week.\n`;
+  } else {
+    const doneCount = goals.filter(g => g.done).length;
+    body += `Progress: ${doneCount}/${goals.length} completed (${Math.round((doneCount/goals.length)*100)}%)\n\n`;
+    goals.forEach((g, i) => {
+      body += `  ${g.done ? '✅' : '⬜'} ${g.text}\n`;
+    });
+  }
+
+  body += `\n`;
+
+  // Tracker
+  body += `📊 STUDY TRACKER\n`;
+  body += `${'─'.repeat(40)}\n`;
+  body += `Total blocks completed: ${sessions.length}\n`;
+  body += `Total focused time: ${sessions.length * 45} minutes (~${(sessions.length * 45 / 60).toFixed(1)} hours)\n\n`;
+
+  if (sessions.length > 0) {
+    const recent = sessions.slice(0, 10);
+    body += `Recent sessions:\n`;
+    recent.forEach(s => {
+      body += `  ✅ ${s.name} — ${s.day} at ${s.time} (45 min)\n`;
+    });
+    if (sessions.length > 10) {
+      body += `  ... and ${sessions.length - 10} more sessions\n`;
+    }
+  } else {
+    body += `No sessions logged yet.\n`;
+  }
+
+  body += `\n${'─'.repeat(40)}\n`;
+  body += `Sent from Focus Framework 🧠\n`;
+  body += `"Your brain is smarter than the content creator algorithm. Train it."`;
+
+  return body;
+}
+
+function previewEmail() {
+  const body = buildEmailBody();
+  document.getElementById('email-preview').textContent = body;
+  document.getElementById('email-preview-wrap').style.display = 'block';
+  document.getElementById('email-copied').style.display = 'none';
+}
+
+function sendEmail() {
+  const to = document.getElementById('email-to').value.trim();
+  const name = document.getElementById('email-name').value.trim() || 'Student';
+  const subject = `Focus Framework — Weekly Update from ${name}`;
+  const body = buildEmailBody();
+  const mailtoUrl = `mailto:${encodeURIComponent(to)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  window.location.href = mailtoUrl;
+}
+
+function copyEmail() {
+  const body = buildEmailBody();
+  navigator.clipboard.writeText(body).then(() => {
+    const el = document.getElementById('email-copied');
+    el.style.display = 'block';
+    setTimeout(() => { el.style.display = 'none'; }, 2000);
+  }).catch(() => {
+    // Fallback
+    const ta = document.createElement('textarea');
+    ta.value = body;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    const el = document.getElementById('email-copied');
+    el.style.display = 'block';
+    setTimeout(() => { el.style.display = 'none'; }, 2000);
+  });
+}
 </script>
 </body>
 </html>
