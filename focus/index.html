@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,6 +38,8 @@
   .info-box.green .info-title { color: var(--green); }
   .info-box.purple { background: rgba(167,139,250,0.08); border: 1px solid rgba(167,139,250,0.25); }
   .info-box.purple .info-title { color: var(--purple); }
+  .info-box.gold { background: rgba(251,191,36,0.08); border: 1px solid rgba(251,191,36,0.25); }
+  .info-box.gold .info-title { color: var(--gold); }
   .info-title { font-size: 14px; font-weight: 700; margin-bottom: 10px; }
   .info-item { margin-bottom: 8px; }
   .info-item:last-child { margin-bottom: 0; }
@@ -129,13 +132,11 @@
   .goal-delete:hover { color: var(--red); opacity: 1; }
   .goal-progress { width: 100%; height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; margin-top: 8px; }
   .goal-progress-bar { height: 100%; background: var(--green); border-radius: 4px; transition: width 0.3s; }
-  .email-card { background: var(--card); border-radius: 12px; padding: 16px; border: 1px solid var(--border); margin-top: 14px; }
   .email-input { width: 100%; padding: 10px 12px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg); color: var(--text); font-size: 13px; margin-bottom: 10px; outline: none; }
   .email-input:focus { border-color: var(--accent); }
   .btn-email { width: 100%; padding: 12px 0; border-radius: 8px; border: none; cursor: pointer; background: var(--purple); color: white; font-weight: 700; font-size: 13px; }
   .btn-email:hover { opacity: 0.85; }
   .email-preview { background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 12px; margin-top: 10px; font-size: 12px; color: var(--muted); line-height: 1.6; white-space: pre-wrap; max-height: 300px; overflow-y: auto; }
-  /* Points */
   .points-banner { background: linear-gradient(135deg, rgba(251,191,36,0.12), rgba(245,158,11,0.08)); border: 1px solid rgba(251,191,36,0.3); border-radius: 12px; padding: 16px; text-align: center; margin-bottom: 10px; }
   .points-total { font-size: 48px; font-weight: 800; color: var(--gold); }
   .points-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
@@ -170,9 +171,9 @@
     <button class="tab-btn" onclick="switchTab('breaks')">Breaks</button>
     <button class="tab-btn" onclick="switchTab('rewards')">Rewards</button>
     <button class="tab-btn" onclick="switchTab('tips')">Tips</button>
-    <button class="tab-btn" onclick="switchTab('offline')">Go Offline</button>
     <button class="tab-btn" onclick="switchTab('timer')">Timer</button>
     <button class="tab-btn" onclick="switchTab('goals')">Goals</button>
+    <button class="tab-btn" onclick="switchTab('points')">Points</button>
     <button class="tab-btn" onclick="switchTab('tracker')">Tracker</button>
   </div>
 
@@ -187,7 +188,6 @@
         <div class="phase-seg b">5 min REST</div>
       </div>
     </div>
-
     <div class="card"><div class="step-row"><div class="step-icon">📱➡️🚪</div><div><div class="card-title">Step 0 — Phone Leaves the Room</div><p class="card-text">Not on silent. Not face down. In another room. This is the single most important step. No negotiation.</p></div></div></div>
     <div class="card"><div class="step-row"><div class="step-icon">🎯</div><div><div class="card-title">Step 1 — Pick ONE Task</div><p class="card-text">Not "study math." Something specific: "Solve exercises 4-8 from Chapter 6." Small and clear beats big and vague.</p></div></div></div>
     <div class="card"><div class="step-row"><div class="step-icon">⏱️</div><div><div class="card-title">Step 2 — Set a 45-Minute Timer</div><p class="card-text">Use the Timer tab, a wall clock, or a kitchen timer. Not your phone. 45 minutes — that's it. Not forever.</p></div></div></div>
@@ -196,7 +196,6 @@
     <div class="card"><div class="step-row"><div class="step-icon">📋</div><div><div class="card-title">Step 5 — Plan the Next Task (5 min)</div><p class="card-text">Before diving back in, take 5 minutes to write down exactly what you'll work on next. "What's the one thing I need to do in the next 45 minutes?" This removes decision paralysis when the next round starts.</p></div></div></div>
     <div class="card"><div class="step-row"><div class="step-icon">🔁</div><div><div class="card-title">Step 6 — Repeat & Reward</div><p class="card-text">Go again. 2-3 rounds = 90-135 mins of real focused work. That's more than most students get in an entire evening. Check the Rewards tab for how to celebrate your wins.</p></div></div></div>
     <div class="card"><div class="step-row"><div class="step-icon">📧</div><div><div class="card-title">Step 7 — Showcase Your Progress</div><p class="card-text">Any time you want, send a snapshot of your weekly goals and study blocks to your tutor, parents, or yourself. Sharing progress keeps you accountable and makes your hard work visible. <span style="color:var(--accent);cursor:pointer;font-weight:600;" onclick="switchTab('email')">Open Update →</span></p></div></div></div>
-
     <div class="info-box warn">
       <p class="info-title">⚡ The Math That Matters</p>
       <p class="card-text">2 focused rounds = ~1.5 hours of real work.<br>3 hours of "studying" with your phone nearby = maybe 30 mins of actual focus.<br><strong style="color:var(--text)">Less time. Better results. More free time after.</strong></p>
@@ -214,7 +213,6 @@
       <div class="info-item"><div class="info-item-title">Watching TV shows or series</div><div class="info-item-desc">One episode turns into three — your brain is processing storylines, not resting</div></div>
       <div class="info-item"><div class="info-item-title">Watching brain rots or toxic news or political debates</div><div class="info-item-desc">Fills your head with stress, outrage, and opinions that drain focus even more than studying did</div></div>
     </div>
-
     <div class="info-box green">
       <p class="info-title">✅ Real Breaks (actually recharge you)</p>
       <div class="info-item"><div class="info-item-title">Walk to the kitchen, drink water</div><div class="info-item-desc">Movement + hydration resets attention</div></div>
@@ -227,7 +225,6 @@
       <div class="info-item"><div class="info-item-title">Organize your desk — remove clutter</div><div class="info-item-desc">A clean space calms the mind. Toss wrappers, stack books, clear the chaos. Takes 3 minutes, feels amazing.</div></div>
       <div class="info-item"><div class="info-item-title">Prep for tomorrow — uniform, tiffin, clothes</div><div class="info-item-desc">Lay out your school uniform, pack your tiffin box, pick 2 outfits. Future-you will thank present-you.</div></div>
     </div>
-
     <div class="info-box purple">
       <p class="info-title">📋 Planning Break (the secret weapon)</p>
       <p class="card-text" style="margin-bottom:8px;">The 5-minute planning phase is what separates this from ordinary study. Here's what to do:</p>
@@ -235,7 +232,6 @@
       <div class="info-item"><div class="info-item-title">Identify exactly what's next</div><div class="info-item-desc">Be specific: "Read pages 50-55 and highlight key terms" not "do more biology."</div></div>
       <div class="info-item"><div class="info-item-title">Note anything you're stuck on</div><div class="info-item-desc">Write it down so it doesn't drain mental energy during the next round.</div></div>
     </div>
-
     <div class="accent-card">
       <p class="key">🔑 The Test</p>
       <p class="card-text" style="margin-top:6px;">After your break, do you feel ready to work again — or do you want more break? If you want more, it wasn't a real break. It was entertainment your brain is now craving more of.</p>
@@ -248,43 +244,13 @@
       <h2 style="font-size:15px;color:var(--warn);margin-bottom:4px;">🏆 Why Rewards Matter</h2>
       <p class="card-text">Your brain learns to repeat behaviours that feel rewarding. If studying always ends in guilt or exhaustion, your brain will avoid it. If it ends with something genuinely enjoyable, your brain starts associating focus with good outcomes. The trick: rewards must come <strong style="color:var(--text)">after</strong> the work, never during.</p>
     </div>
-
     <div class="card">
       <h3 style="font-size:14px;font-weight:700;margin-bottom:12px;color:var(--accent);">Reward Tiers — Earn as You Go</h3>
-      <div class="reward-tier">
-        <div class="reward-badge">⭐</div>
-        <div class="reward-info">
-          <div class="r-title">After 1 Block (45 min)</div>
-          <div class="r-unlock">First reward = real rest. Always.</div>
-          <div class="r-desc">Take your 5-min real break — stretch, walk, water, fresh air. Then treat yourself: a favourite snack, play one song loud, doodle for fun, make yourself a nice drink.</div>
-        </div>
-      </div>
-      <div class="reward-tier">
-        <div class="reward-badge">🌟</div>
-        <div class="reward-info">
-          <div class="r-title">After 2 Blocks (~2 hrs)</div>
-          <div class="r-unlock">Rest first, then a medium reward</div>
-          <div class="r-desc">Take a proper break — go outside, breathe, move your body. Then: call your favourite friend or cousin, play a quick game, go for a walk with music, tidy up your bag or desk for tomorrow, have dessert.</div>
-        </div>
-      </div>
-      <div class="reward-tier">
-        <div class="reward-badge">🔥</div>
-        <div class="reward-info">
-          <div class="r-title">After 3 Blocks (~3 hrs)</div>
-          <div class="r-unlock">You've earned serious rest + a big reward</div>
-          <div class="r-desc">Rest your mind fully first — you've worked hard. Then ask yourself what you'd like to do — define a new time-boxed reward for yourself, 30 min of gaming, go out with friends, order something you've wanted online.</div>
-        </div>
-      </div>
-      <div class="reward-tier">
-        <div class="reward-badge">💎</div>
-        <div class="reward-info">
-          <div class="r-title">Weekly Streak (5+ days)</div>
-          <div class="r-unlock">The big one — consistency deserves celebration</div>
-          <div class="r-desc">Movie night, a new book or game, a meal out, a full free afternoon with zero guilt — you earned every second.</div>
-        </div>
-      </div>
+      <div class="reward-tier"><div class="reward-badge">⭐</div><div class="reward-info"><div class="r-title">After 1 Block (45 min)</div><div class="r-unlock">First reward = real rest. Always.</div><div class="r-desc">Take your 5-min real break — stretch, walk, water, fresh air. Then treat yourself: a favourite snack, play one song loud, doodle for fun, make yourself a nice drink.</div></div></div>
+      <div class="reward-tier"><div class="reward-badge">🌟</div><div class="reward-info"><div class="r-title">After 2 Blocks (~2 hrs)</div><div class="r-unlock">Rest first, then a medium reward</div><div class="r-desc">Take a proper break — go outside, breathe, move your body. Then: call your favourite friend or cousin, play a quick game, go for a walk with music, tidy up your bag or desk for tomorrow, have dessert.</div></div></div>
+      <div class="reward-tier"><div class="reward-badge">🔥</div><div class="reward-info"><div class="r-title">After 3 Blocks (~3 hrs)</div><div class="r-unlock">You've earned serious rest + a big reward</div><div class="r-desc">Rest your mind fully first — you've worked hard. Then ask yourself what you'd like to do — define a new time-boxed reward for yourself, 30 min of gaming, go out with friends, order something you've wanted online.</div></div></div>
+      <div class="reward-tier"><div class="reward-badge">💎</div><div class="reward-info"><div class="r-title">Weekly Streak (5+ days)</div><div class="r-unlock">The big one — consistency deserves celebration</div><div class="r-desc">Movie night, a new book or game, a meal out, a full free afternoon with zero guilt — you earned every second.</div></div></div>
     </div>
-
     <div class="info-box warn">
       <p class="info-title">💡 Smart Reward Rules</p>
       <div class="info-item"><div class="info-item-title">Reward AFTER, never during</div><div class="info-item-desc">"I'll watch this after 2 blocks" works. "I'll watch while studying" destroys focus.</div></div>
@@ -293,15 +259,26 @@
       <div class="info-item"><div class="info-item-title">Physical rewards hit different</div><div class="info-item-desc">A walk, a snack, a shower, shooting hoops — these feel more rewarding than screens after deep focus.</div></div>
       <div class="info-item"><div class="info-item-title">Never skip the reward</div><div class="info-item-desc">If you did the work, take the reward. Skipping it teaches your brain that effort doesn't pay off.</div></div>
     </div>
-
     <div class="accent-card">
       <p class="key">🧠 The Science</p>
       <p class="card-text" style="margin-top:6px;">Dopamine (the "motivation chemical") doesn't just respond to pleasure — it responds to <strong style="color:var(--text)">anticipated</strong> pleasure. When you pair focused work with a reliable reward afterward, your brain starts releasing dopamine <em>before</em> you even sit down to study. You're literally rewiring yourself to want to focus.</p>
     </div>
   </div>
 
-  <!-- TIPS TAB -->
+  <!-- TIPS TAB (now includes Go Offline) -->
   <div id="tab-tips" class="tab-content">
+    <div class="info-box warn" style="margin-bottom:14px;">
+      <p class="info-title">⏰ Pre-Study Ritual</p>
+      <div class="info-item"><div class="info-item-desc">1. Phone goes in another room<br>2. Open this Focus page on your laptop<br>3. Turn off Wi-Fi and Bluetooth (5 seconds)<br>4. Start the timer<br><br>Going offline removes the <em>possibility</em> of distraction. You don't need willpower to avoid YouTube if YouTube literally can't load.</div></div>
+    </div>
+
+    <div class="card" style="margin-bottom:14px;">
+      <h2 style="font-size:15px;color:var(--accent);margin-bottom:8px;">✈️ Go Offline on Your Mac</h2>
+      <p class="card-text" style="margin-bottom:10px;">Macs don't have a single "Airplane Mode" button like iPhones. But you can go fully offline in seconds by turning off Wi-Fi and Bluetooth manually. Do this before every study session.</p>
+      <div class="info-item"><div class="info-item-title">Fastest: Menu Bar</div><div class="info-item-desc">Click the <strong style="color:var(--text)">Wi-Fi icon</strong> (top-right) → Toggle <strong style="color:var(--text)">OFF</strong>. Then click <strong style="color:var(--text)">Control Center</strong> (two sliders icon) → <strong style="color:var(--text)">Bluetooth</strong> → Toggle <strong style="color:var(--text)">OFF</strong>. Done in 5 seconds.</div></div>
+      <div class="info-item"><div class="info-item-title">Alternative: System Settings</div><div class="info-item-desc"><strong style="color:var(--text)">Apple menu</strong> → <strong style="color:var(--text)">System Settings</strong> → Turn off <strong style="color:var(--text)">Wi-Fi</strong> and <strong style="color:var(--text)">Bluetooth</strong> from the sidebar.</div></div>
+    </div>
+
     <div class="card"><div class="card-title">🧠 The Friction Moment Is Normal</div><p class="card-text">About 10-15 minutes into hard work, your brain creates an urgent "I need a break" feeling. This is not exhaustion — it's your brain testing whether you'll give it easy dopamine. If you ride it out for ~2 minutes, it fades and focus deepens.</p></div>
     <div class="card"><div class="card-title">🎮 You're Being Played</div><p class="card-text">Short-form video apps hire hundreds of engineers whose only job is to keep you scrolling. The algorithm studies what makes YOU specifically unable to stop. It's not a fair fight — so don't fight it. Remove the option entirely during study time.</p></div>
     <div class="card"><div class="card-title">📝 Be Specific About Tasks</div><p class="card-text">"Study biology" → brain panics, doesn't know where to start, reaches for phone. "Read pages 42-48 and write 5 bullet points" → brain has a clear path. Specific tasks feel less overwhelming.</p></div>
@@ -309,38 +286,6 @@
     <div class="card"><div class="card-title">😤 Bad Sessions Still Count</div><p class="card-text">A 45-minute block where you struggled and felt confused is still better than 3 hours of scrolling. Learning feels uncomfortable. That's not a sign it's not working — it's the sign that it IS.</p></div>
     <div class="card"><div class="card-title">🕐 Start With Just One Block</div><p class="card-text">Don't promise yourself 3 hours. Promise yourself one 45-minute block. That's it. After that, decide if you want another. Most of the time, starting is the hardest part.</p></div>
     <div class="card"><div class="card-title">📋 Planning Prevents Procrastination</div><p class="card-text">The 5-minute planning phase isn't wasted time — it's what stops you from opening your phone "just to figure out what to do next." When the next round starts and you already know exactly what to work on, there's no gap for distraction to sneak in.</p></div>
-  </div>
-
-  <!-- GO OFFLINE TAB -->
-  <div id="tab-offline" class="tab-content">
-    <div class="card">
-      <h2 style="font-size:15px;color:var(--accent);margin-bottom:4px;">✈️ Go Offline on Your Mac</h2>
-      <p class="card-text">Macs don't have a single "Airplane Mode" button like iPhones. But you can go fully offline in seconds by turning off Wi-Fi and Bluetooth manually. Do this before every study session.</p>
-    </div>
-
-    <div class="card">
-      <div class="card-title" style="color:var(--accent);">Method 1 — Menu Bar (Fastest)</div>
-      <div class="info-item"><div class="info-item-title">Step 1: Turn off Wi-Fi</div><div class="info-item-desc">Click the <strong style="color:var(--text)">Wi-Fi icon</strong> in the top-right corner of your screen → Toggle the switch <strong style="color:var(--text)">OFF</strong>. The icon will appear with a slash through it.</div></div>
-      <div class="info-item"><div class="info-item-title">Step 2: Turn off Bluetooth</div><div class="info-item-desc">Click the <strong style="color:var(--text)">Control Center icon</strong> (looks like two sliders) in the top-right → Click <strong style="color:var(--text)">Bluetooth</strong> → Toggle it <strong style="color:var(--text)">OFF</strong>.</div></div>
-      <div class="info-item"><div class="info-item-title">Done!</div><div class="info-item-desc">You're now fully offline. No notifications, no temptation, no distractions. This page still works — it's already loaded.</div></div>
-    </div>
-
-    <div class="card">
-      <div class="card-title" style="color:var(--purple);">Method 2 — System Settings</div>
-      <div class="info-item"><div class="info-item-title">Step 1:</div><div class="info-item-desc">Click the <strong style="color:var(--text)">Apple menu </strong> (top-left corner) → Select <strong style="color:var(--text)">System Settings</strong>.</div></div>
-      <div class="info-item"><div class="info-item-title">Step 2:</div><div class="info-item-desc">Click <strong style="color:var(--text)">Wi-Fi</strong> in the sidebar → Toggle the switch <strong style="color:var(--text)">OFF</strong>.</div></div>
-      <div class="info-item"><div class="info-item-title">Step 3:</div><div class="info-item-desc">Click <strong style="color:var(--text)">Bluetooth</strong> in the sidebar → Toggle the switch <strong style="color:var(--text)">OFF</strong>.</div></div>
-    </div>
-
-    <div class="info-box warn">
-      <p class="info-title">⏰ Make It a Ritual</p>
-      <div class="info-item"><div class="info-item-title">Before every study session:</div><div class="info-item-desc">1. Phone goes in another room<br>2. Open this Focus page on your laptop<br>3. Turn off Wi-Fi and Bluetooth (takes 5 seconds)<br>4. Start the timer<br><br>When you're done studying, just reverse the steps to go back online.</div></div>
-    </div>
-
-    <div class="accent-card">
-      <p class="key">💡 Why This Works</p>
-      <p class="card-text" style="margin-top:6px;">Going offline removes the <em>possibility</em> of distraction, so your brain stops wasting energy resisting it. You don't need willpower to avoid YouTube if YouTube literally can't load. Save your willpower for the hard problems.</p>
-    </div>
   </div>
 
   <!-- TIMER TAB -->
@@ -363,12 +308,12 @@
         <button class="timer-btn reset" onclick="resetTimer()">Reset</button>
       </div>
     </div>
-    <div id="timer-points-earned" style="display:none;" class="info-box warn">
+    <div id="timer-points-earned" style="display:none;" class="info-box gold">
       <p style="text-align:center;font-size:14px;font-weight:700;color:var(--gold);margin:0;">🎉 +<span id="timer-pts-val">0</span> points earned!</p>
       <p style="text-align:center;font-size:12px;color:var(--muted);margin:4px 0 0;" id="timer-pts-detail"></p>
     </div>
     <div class="card" style="margin-top:14px;">
-      <p class="card-text" style="text-align:center;">💡 <strong style="color:var(--text)">Tip:</strong> Keep this open on your laptop while your phone is in another room. The timer beeps when each phase ends — plan, focus, and rest.</p>
+      <p class="card-text" style="text-align:center;">💡 <strong style="color:var(--text)">Tip:</strong> Keep this open on your laptop while your phone is in another room. The timer beeps when each phase ends — plan, focus, and rest. Points are awarded automatically when focus ends.</p>
     </div>
   </div>
 
@@ -378,7 +323,6 @@
       <h2 style="font-size:15px;color:var(--warn);margin-bottom:4px;">🎯 Goals for the Week</h2>
       <p class="card-text">Write down what you want to accomplish this week. Be specific. Check them off as you go.</p>
     </div>
-
     <div class="card">
       <div id="goals-progress-wrap" style="display:none;">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
@@ -395,7 +339,6 @@
         <button class="btn-danger" id="goals-clear-btn" style="display:none;" onclick="showConfirm('goals')">Clear All</button>
       </div>
     </div>
-
     <div id="goals-list"></div>
     <div id="goals-empty" class="empty">
       <p>No goals set yet.</p>
@@ -403,8 +346,8 @@
     </div>
   </div>
 
-  <!-- TRACKER TAB -->
-  <div id="tab-tracker" class="tab-content">
+  <!-- REWARD POINTS TAB -->
+  <div id="tab-points" class="tab-content">
     <div class="points-banner">
       <div class="points-label">Total Focus Points</div>
       <div id="total-points" class="points-total">0</div>
@@ -413,7 +356,8 @@
     </div>
 
     <div class="card">
-      <h3 style="font-size:14px;font-weight:700;margin-bottom:8px;color:var(--gold);">⭐ Points System</h3>
+      <h3 style="font-size:14px;font-weight:700;margin-bottom:8px;color:var(--gold);">⭐ How Points Work</h3>
+      <p class="card-text" style="margin-bottom:10px;">Points are earned automatically when the timer's focus phase completes. The more blocks you do in a single day, the bigger the bonus on <em>every</em> block that day.</p>
       <div class="info-item"><div class="info-item-title">Each block completed = <span style="color:var(--gold)">1 point</span></div><div class="info-item-desc">Base points for finishing a plan + focus cycle</div></div>
       <div class="info-item"><div class="info-item-title">2 blocks in a day = <span style="color:var(--gold)">+2 bonus</span> each</div><div class="info-item-desc">Consistency in a single session pays off</div></div>
       <div class="info-item"><div class="info-item-title">3-4 blocks in a day = <span style="color:var(--gold)">+3 bonus</span> each</div><div class="info-item-desc">Serious focus earns serious points</div></div>
@@ -421,6 +365,22 @@
       <div class="info-item"><div class="info-item-title">10+ blocks in a day = <span style="color:var(--gold)">+10 bonus</span> each</div><div class="info-item-desc">Legendary. You're unstoppable.</div></div>
     </div>
 
+    <div class="card">
+      <h3 style="font-size:14px;font-weight:700;margin-bottom:8px;">📊 Points History</h3>
+      <div id="points-history"></div>
+      <div id="points-history-empty" class="empty" style="padding:12px;">
+        <p>No points earned yet. Start the timer to earn your first!</p>
+      </div>
+    </div>
+
+    <div class="accent-card">
+      <p class="key">💡 Points never go away</p>
+      <p class="card-text" style="margin-top:6px;">Clearing tracker logs only removes the session list — your total points are saved permanently. Every block you complete adds to your lifetime score.</p>
+    </div>
+  </div>
+
+  <!-- TRACKER TAB -->
+  <div id="tab-tracker" class="tab-content">
     <div class="card tracker-count">
       <div class="label">Completed Blocks</div>
       <div id="streak-num" class="num">0</div>
@@ -443,13 +403,12 @@
     </div>
   </div>
 
-  <!-- EMAIL UPDATE TAB -->
+  <!-- EMAIL UPDATE TAB (hidden from tabs, accessed via Step 7) -->
   <div id="tab-email" class="tab-content">
     <div class="card">
       <h2 style="font-size:15px;color:var(--purple);margin-bottom:4px;">📧 Send Weekly Update</h2>
       <p class="card-text">Send a snapshot of your weekly goals, study tracker, and points to your tutor, parents, or yourself. Stay accountable!</p>
     </div>
-
     <div class="card">
       <p style="font-size:13px;font-weight:700;margin-bottom:10px;">Who should receive the update?</p>
       <input type="text" id="email-to" class="email-input" placeholder="Email address (e.g. tutor@email.com)">
@@ -464,10 +423,9 @@
         <p id="email-copied" style="display:none;text-align:center;color:var(--green);font-size:12px;margin-top:6px;">Copied to clipboard!</p>
       </div>
     </div>
-
     <div class="accent-card">
       <p class="key">💡 How It Works</p>
-      <p class="card-text" style="margin-top:6px;">This generates a summary from your Goals and Tracker tabs and opens your email app with everything pre-filled. If you're offline, the email will sit in your outbox and send automatically when you reconnect.</p>
+      <p class="card-text" style="margin-top:6px;">This generates a summary from your Goals, Tracker, and Points tabs and opens your email app with everything pre-filled. If you're offline, the email will sit in your outbox and send automatically when you reconnect.</p>
     </div>
   </div>
 
@@ -476,15 +434,13 @@
 
 <script>
 // --- Tab Switching ---
-const tabNames = ['guide','breaks','rewards','tips','offline','timer','goals','tracker','email'];
+const tabNames = ['guide','breaks','rewards','tips','timer','goals','points','tracker'];
 function switchTab(id) {
   document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
   document.getElementById('tab-' + id).classList.add('active');
   const idx = tabNames.indexOf(id);
-  if (idx >= 0 && idx < document.querySelectorAll('.tab-btn').length) {
-    document.querySelectorAll('.tab-btn')[idx].classList.add('active');
-  }
+  if (idx >= 0) document.querySelectorAll('.tab-btn')[idx].classList.add('active');
 }
 
 // --- Confirm Dialog ---
@@ -493,7 +449,7 @@ function showConfirm(type) {
   const dialog = document.getElementById('confirm-dialog');
   const msg = document.getElementById('confirm-msg');
   if (type === 'tracker') {
-    msg.textContent = 'Clear all logged study blocks and points? This cannot be undone.';
+    msg.textContent = 'Clear all block logs? Your points will be kept safe.';
     confirmCallback = clearSessions;
   } else if (type === 'goals') {
     msg.textContent = 'Clear all weekly goals? This cannot be undone.';
@@ -511,90 +467,106 @@ function confirmNo() {
   confirmCallback = null;
 }
 
-// --- Points System ---
-function getDateKey(dateStr) {
-  // Returns YYYY-MM-DD from a session's stored date string
-  // Sessions store day as "Mon, Mar 29" style — we'll use a dateKey field instead
-  return dateStr || '';
-}
-
-function calcPoints(sessionsList) {
-  // Group sessions by dateKey
-  const byDay = {};
-  sessionsList.forEach(s => {
-    const dk = s.dateKey || 'unknown';
-    if (!byDay[dk]) byDay[dk] = [];
-    byDay[dk].push(s);
-  });
-
-  let totalPts = 0;
-  const dayDetails = {};
-
-  Object.keys(byDay).forEach(dk => {
-    const count = byDay[dk].length;
-    let bonus = 0;
-    if (count >= 10) bonus = 10;
-    else if (count >= 5) bonus = 6;
-    else if (count >= 3) bonus = 3;
-    else if (count >= 2) bonus = 2;
-
-    const dayPts = count * (1 + bonus);
-    totalPts += dayPts;
-    dayDetails[dk] = { count, bonus, dayPts };
-  });
-
-  return { totalPts, byDay, dayDetails };
-}
+// --- Points System (separate from tracker) ---
+// Points are stored independently: { totalPoints, history: [{dateKey, count, bonus, dayPts}] }
+let pointsData = { totalPoints: 0, history: {} };
+try { pointsData = JSON.parse(localStorage.getItem('focus_points') || '{"totalPoints":0,"history":{}}'); } catch(e) { pointsData = { totalPoints: 0, history: {} }; }
 
 function getTodayKey() {
   const d = new Date();
   return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
 }
 
-function renderPoints() {
-  const { totalPts, dayDetails } = calcPoints(sessions);
+function getBonusForCount(count) {
+  if (count >= 10) return 10;
+  if (count >= 5) return 6;
+  if (count >= 3) return 3;
+  if (count >= 2) return 2;
+  return 0;
+}
+
+function awardPoints() {
+  const dk = getTodayKey();
+  if (!pointsData.history[dk]) pointsData.history[dk] = { count: 0, pts: 0 };
+
+  const dayData = pointsData.history[dk];
+  dayData.count++;
+
+  // Recalculate entire day's points with new bonus tier
+  const bonus = getBonusForCount(dayData.count);
+  const newDayPts = dayData.count * (1 + bonus);
+  const ptsDiff = newDayPts - dayData.pts;
+  dayData.pts = newDayPts;
+
+  pointsData.totalPoints += ptsDiff;
+  try { localStorage.setItem('focus_points', JSON.stringify(pointsData)); } catch(e) {}
+
+  renderPointsTab();
+
+  // Return info for timer display
+  return { earned: 1 + bonus, bonus, todayCount: dayData.count, todayPts: newDayPts };
+}
+
+function renderPointsTab() {
   const todayKey = getTodayKey();
-  const todayInfo = dayDetails[todayKey];
+  document.getElementById('total-points').textContent = pointsData.totalPoints;
 
-  document.getElementById('total-points').textContent = totalPts;
-
+  const todayData = pointsData.history[todayKey];
   const todayEl = document.getElementById('today-points');
-  if (todayInfo) {
-    const todayPts = todayInfo.dayPts;
-    const bonusLabel = todayInfo.bonus > 0 ? ` (includes +${todayInfo.bonus} bonus per block!)` : '';
-    todayEl.textContent = `Today: ${todayInfo.count} block${todayInfo.count !== 1 ? 's' : ''} = ${todayPts} pts${bonusLabel}`;
+  if (todayData && todayData.count > 0) {
+    const bonus = getBonusForCount(todayData.count);
+    const bonusLabel = bonus > 0 ? ` (includes +${bonus} bonus per block!)` : '';
+    todayEl.textContent = `Today: ${todayData.count} block${todayData.count !== 1 ? 's' : ''} = ${todayData.pts} pts${bonusLabel}`;
   } else {
     todayEl.textContent = 'No blocks today yet — start your first one!';
   }
 
-  // Breakdown pills for recent days
+  // Breakdown pills
   const brkEl = document.getElementById('points-breakdown');
-  const sortedDays = Object.keys(dayDetails).sort().reverse().slice(0, 5);
+  const sortedDays = Object.keys(pointsData.history).sort().reverse().slice(0, 5);
   brkEl.innerHTML = sortedDays.map(dk => {
-    const d = dayDetails[dk];
+    const d = pointsData.history[dk];
     const label = dk === todayKey ? 'Today' : dk;
-    return `<span class="points-pill"><strong>${d.dayPts}</strong> pts — ${label} (${d.count} blocks)</span>`;
+    return `<span class="points-pill"><strong>${d.pts}</strong> pts — ${label} (${d.count} blocks)</span>`;
   }).join('');
-}
 
-// --- Session Tracker ---
+  // Points history
+  const histEl = document.getElementById('points-history');
+  const emptyEl = document.getElementById('points-history-empty');
+  const allDays = Object.keys(pointsData.history).sort().reverse();
+  if (allDays.length === 0) {
+    histEl.innerHTML = '';
+    emptyEl.style.display = 'block';
+  } else {
+    emptyEl.style.display = 'none';
+    histEl.innerHTML = allDays.map(dk => {
+      const d = pointsData.history[dk];
+      const bonus = getBonusForCount(d.count);
+      const bonusHtml = bonus > 0 ? `<span class="bonus-tag">+${bonus}/block</span>` : '';
+      const label = dk === todayKey ? 'Today' : dk;
+      return `<div class="session-entry">
+        <div><div class="name" style="color:var(--gold);">${d.pts} points</div><div class="time">${label} — ${d.count} block${d.count!==1?'s':''} ${bonusHtml}</div></div>
+        <span class="dur" style="color:var(--gold);">${d.count * 45} min</span>
+      </div>`;
+    }).join('');
+  }
+}
+renderPointsTab();
+
+// --- Session Tracker (logs only, no points logic) ---
 let sessions = [];
 try { sessions = JSON.parse(localStorage.getItem('focus_sessions') || '[]'); } catch(e) { sessions = []; }
-// Migrate old sessions without dateKey
-sessions.forEach(s => { if (!s.dateKey) s.dateKey = 'legacy'; });
 renderSessions();
 
 function addSession() {
   const input = document.getElementById('session-input');
   const val = input.value.trim() || 'Focused session';
   const now = new Date();
-  const dateKey = getTodayKey();
   sessions.unshift({
     name: val,
     time: now.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'}),
     day: now.toLocaleDateString([], {weekday:'short',month:'short',day:'numeric'}),
-    dateKey: dateKey,
-    ts: now.getTime()
+    dateKey: getTodayKey()
   });
   try { localStorage.setItem('focus_sessions', JSON.stringify(sessions)); } catch(e) {}
   input.value = '';
@@ -602,36 +574,32 @@ function addSession() {
 }
 
 function autoLogBlock() {
-  // Called by timer when focus phase completes
   const now = new Date();
-  const dateKey = getTodayKey();
   sessions.unshift({
     name: '⏱️ Timer block completed',
     time: now.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'}),
     day: now.toLocaleDateString([], {weekday:'short',month:'short',day:'numeric'}),
-    dateKey: dateKey,
-    ts: now.getTime()
+    dateKey: getTodayKey()
   });
   try { localStorage.setItem('focus_sessions', JSON.stringify(sessions)); } catch(e) {}
   renderSessions();
 
-  // Show points earned on timer tab
-  const { dayDetails } = calcPoints(sessions);
-  const todayInfo = dayDetails[dateKey];
-  if (todayInfo) {
-    const pts = 1 + todayInfo.bonus;
-    const ptsEl = document.getElementById('timer-points-earned');
-    document.getElementById('timer-pts-val').textContent = pts;
-    const detail = todayInfo.bonus > 0
-      ? `1 base + ${todayInfo.bonus} bonus (${todayInfo.count} blocks today!)`
-      : '1 base point';
-    document.getElementById('timer-pts-detail').textContent = detail;
-    ptsEl.style.display = 'block';
-    setTimeout(() => { ptsEl.style.display = 'none'; }, 5000);
-  }
+  // Award points (separate system)
+  const result = awardPoints();
+
+  // Show on timer tab
+  const ptsEl = document.getElementById('timer-points-earned');
+  document.getElementById('timer-pts-val').textContent = result.earned;
+  const detail = result.bonus > 0
+    ? `1 base + ${result.bonus} bonus (${result.todayCount} blocks today!)`
+    : '1 base point';
+  document.getElementById('timer-pts-detail').textContent = detail;
+  ptsEl.style.display = 'block';
+  setTimeout(() => { ptsEl.style.display = 'none'; }, 5000);
 }
 
 function clearSessions() {
+  // Only clears logs, NOT points
   sessions = [];
   try { localStorage.setItem('focus_sessions', JSON.stringify(sessions)); } catch(e) {}
   renderSessions();
@@ -653,51 +621,19 @@ function renderSessions() {
   else if (sessions.length < 15) msg.textContent = "Solid streak! Your focus is growing 💪";
   else msg.textContent = "You're a focus machine 🔥";
 
-  renderPoints();
-
   if (sessions.length === 0) { list.innerHTML = ''; empty.style.display = 'block'; return; }
   empty.style.display = 'none';
-
-  // Calculate per-session points for display
-  const byDay = {};
-  sessions.forEach((s, i) => {
-    const dk = s.dateKey || 'legacy';
-    if (!byDay[dk]) byDay[dk] = { count: 0 };
-    byDay[dk].count++;
-  });
-
-  // We need order-aware count: count all sessions for that day
-  const dayCounts = {};
-  sessions.forEach(s => {
-    const dk = s.dateKey || 'legacy';
-    if (!dayCounts[dk]) dayCounts[dk] = 0;
-    dayCounts[dk]++;
-  });
-
-  list.innerHTML = sessions.map((s, i) => {
-    const dk = s.dateKey || 'legacy';
-    const count = dayCounts[dk];
-    let bonus = 0;
-    if (count >= 10) bonus = 10;
-    else if (count >= 5) bonus = 6;
-    else if (count >= 3) bonus = 3;
-    else if (count >= 2) bonus = 2;
-    const pts = 1 + bonus;
-    const bonusHtml = bonus > 0 ? `<span class="bonus-tag">+${bonus}</span>` : '';
-
-    return `<div class="session-entry" id="session-${i}">
+  list.innerHTML = sessions.map((s, i) => `
+    <div class="session-entry" id="session-${i}">
       <div><div class="name">✅ ${s.name}</div><div class="time">${s.day} at ${s.time}</div></div>
       <div style="display:flex;align-items:center;">
-        <span class="pts">${pts} pts${bonusHtml}</span>
-        <span class="dur" style="margin-left:8px;">45 min</span>
+        <span class="dur">45 min</span>
         <span class="edit-btn" onclick="editSession(${i})">✏️</span>
       </div>
-    </div>`;
-  }).join('');
+    </div>`).join('');
 }
 
 let editingIndex = null;
-
 function editSession(i) {
   if (editingIndex !== null) cancelEdit();
   editingIndex = i;
@@ -713,7 +649,6 @@ function editSession(i) {
     </div>`;
   document.getElementById('edit-input-' + i).focus();
 }
-
 function saveEdit(i) {
   const input = document.getElementById('edit-input-' + i);
   const val = input.value.trim();
@@ -722,11 +657,7 @@ function saveEdit(i) {
   try { localStorage.setItem('focus_sessions', JSON.stringify(sessions)); } catch(e) {}
   renderSessions();
 }
-
-function cancelEdit() {
-  editingIndex = null;
-  renderSessions();
-}
+function cancelEdit() { editingIndex = null; renderSessions(); }
 
 // --- Goals ---
 let goals = [];
@@ -742,26 +673,22 @@ function addGoal() {
   input.value = '';
   renderGoals();
 }
-
 function toggleGoal(id) {
   const g = goals.find(g => g.id === id);
   if (g) g.done = !g.done;
   try { localStorage.setItem('focus_goals', JSON.stringify(goals)); } catch(e) {}
   renderGoals();
 }
-
 function deleteGoal(id) {
   goals = goals.filter(g => g.id !== id);
   try { localStorage.setItem('focus_goals', JSON.stringify(goals)); } catch(e) {}
   renderGoals();
 }
-
 function clearGoals() {
   goals = [];
   try { localStorage.setItem('focus_goals', JSON.stringify(goals)); } catch(e) {}
   renderGoals();
 }
-
 function renderGoals() {
   const list = document.getElementById('goals-list');
   const empty = document.getElementById('goals-empty');
@@ -769,23 +696,14 @@ function renderGoals() {
   const progressWrap = document.getElementById('goals-progress-wrap');
   const progressBar = document.getElementById('goals-progress-bar');
   const progressText = document.getElementById('goals-progress-text');
-
   clearBtn.style.display = goals.length > 0 ? 'block' : 'none';
-
-  if (goals.length === 0) {
-    list.innerHTML = '';
-    empty.style.display = 'block';
-    progressWrap.style.display = 'none';
-    return;
-  }
-
+  if (goals.length === 0) { list.innerHTML = ''; empty.style.display = 'block'; progressWrap.style.display = 'none'; return; }
   empty.style.display = 'none';
   progressWrap.style.display = 'block';
   const doneCount = goals.filter(g => g.done).length;
   const pct = Math.round((doneCount / goals.length) * 100);
   progressBar.style.width = pct + '%';
   progressText.textContent = doneCount + '/' + goals.length + (pct === 100 ? ' 🎉' : '');
-
   list.innerHTML = goals.map(g => `
     <div class="goal-item">
       <div class="goal-check ${g.done ? 'checked' : ''}" onclick="toggleGoal(${g.id})"></div>
@@ -816,9 +734,7 @@ const sublabels = {
 function renderRounds() {
   const el = document.getElementById('timer-rounds');
   let html = '';
-  for (let i = 1; i <= TOTAL_ROUNDS; i++) {
-    html += '<div class="timer-dot ' + (i < currentRound ? 'done' : '') + '"></div>';
-  }
+  for (let i = 1; i <= TOTAL_ROUNDS; i++) html += '<div class="timer-dot ' + (i < currentRound ? 'done' : '') + '"></div>';
   el.innerHTML = html;
 }
 renderRounds();
@@ -836,19 +752,15 @@ function updateTimerDisplay() {
   const labelEl = document.getElementById('timer-label');
   const subEl = document.getElementById('timer-sublabel');
   const barEl = document.getElementById('timer-bar');
-
   timeEl.textContent = String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
   timeEl.className = 'timer-time ' + phase;
   barEl.className = 'timer-progress-bar ' + phase;
-
   let total = phase === 'focus' ? FOCUS_SECS : phase === 'break' ? BREAK_SECS : PLAN_SECS;
   barEl.style.width = (remaining / total * 100) + '%';
-
   if (phase === 'focus') labelEl.textContent = 'Focus Time — Round ' + currentRound + '/' + TOTAL_ROUNDS;
   else if (phase === 'plan') labelEl.textContent = 'Plan Your Task — Round ' + currentRound + '/' + TOTAL_ROUNDS;
   else if (phase === 'break') labelEl.textContent = 'Rest Break — Round ' + currentRound + '/' + TOTAL_ROUNDS;
   else labelEl.textContent = 'Session Complete!';
-
   subEl.textContent = sublabels[phase] || '';
   highlightPhase();
 }
@@ -857,17 +769,15 @@ function playBeep() {
   try {
     const ctx = new (window.AudioContext || window.webkitAudioContext)();
     function beep(freq, start, dur, vol) {
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-      osc.connect(gain); gain.connect(ctx.destination);
-      osc.frequency.value = freq; osc.type = 'sine';
-      gain.gain.setValueAtTime(vol, ctx.currentTime + start);
-      gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + start + dur);
-      osc.start(ctx.currentTime + start);
-      osc.stop(ctx.currentTime + start + dur);
+      const o = ctx.createOscillator(), g = ctx.createGain();
+      o.connect(g); g.connect(ctx.destination);
+      o.frequency.value = freq; o.type = 'sine';
+      g.gain.setValueAtTime(vol, ctx.currentTime + start);
+      g.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + start + dur);
+      o.start(ctx.currentTime + start); o.stop(ctx.currentTime + start + dur);
     }
-    beep(880, 0, 0.3, 0.8); beep(880, 0.4, 0.3, 0.8); beep(880, 0.8, 0.3, 0.8);
-    beep(880, 1.5, 0.3, 0.8); beep(880, 1.9, 0.3, 0.8); beep(880, 2.3, 0.3, 0.8);
+    beep(880,0,0.3,0.8); beep(880,0.4,0.3,0.8); beep(880,0.8,0.3,0.8);
+    beep(880,1.5,0.3,0.8); beep(880,1.9,0.3,0.8); beep(880,2.3,0.3,0.8);
   } catch(e) {}
 }
 
@@ -875,75 +785,55 @@ function playDoneSound() {
   try {
     const ctx = new (window.AudioContext || window.webkitAudioContext)();
     function beep(freq, start, dur, vol) {
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-      osc.connect(gain); gain.connect(ctx.destination);
-      osc.frequency.value = freq; osc.type = 'sine';
-      gain.gain.setValueAtTime(vol, ctx.currentTime + start);
-      gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + start + dur);
-      osc.start(ctx.currentTime + start);
-      osc.stop(ctx.currentTime + start + dur);
+      const o = ctx.createOscillator(), g = ctx.createGain();
+      o.connect(g); g.connect(ctx.destination);
+      o.frequency.value = freq; o.type = 'sine';
+      g.gain.setValueAtTime(vol, ctx.currentTime + start);
+      g.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + start + dur);
+      o.start(ctx.currentTime + start); o.stop(ctx.currentTime + start + dur);
     }
-    beep(523, 0, 0.25, 0.8); beep(659, 0.3, 0.25, 0.8); beep(784, 0.6, 0.25, 0.8); beep(1047, 0.9, 0.5, 0.9);
-    beep(523, 1.7, 0.25, 0.8); beep(659, 2.0, 0.25, 0.8); beep(784, 2.3, 0.25, 0.8); beep(1047, 2.6, 0.5, 0.9);
+    beep(523,0,0.25,0.8); beep(659,0.3,0.25,0.8); beep(784,0.6,0.25,0.8); beep(1047,0.9,0.5,0.9);
+    beep(523,1.7,0.25,0.8); beep(659,2.0,0.25,0.8); beep(784,2.3,0.25,0.8); beep(1047,2.6,0.5,0.9);
   } catch(e) {}
 }
 
 function tick() {
   if (remaining <= 0) {
     if (phase === 'plan') {
-      playBeep();
-      phase = 'focus';
-      remaining = FOCUS_SECS;
-      updateTimerDisplay();
-      return;
+      playBeep(); phase = 'focus'; remaining = FOCUS_SECS;
+      updateTimerDisplay(); return;
     } else if (phase === 'focus') {
-      // Focus complete — auto-log block and award points
-      autoLogBlock();
-      playBeep();
-      phase = 'break';
-      remaining = BREAK_SECS;
-      updateTimerDisplay();
-      return;
+      autoLogBlock(); playBeep();
+      phase = 'break'; remaining = BREAK_SECS;
+      updateTimerDisplay(); return;
     } else if (phase === 'break') {
-      currentRound++;
-      renderRounds();
+      currentRound++; renderRounds();
       if (currentRound > TOTAL_ROUNDS) {
-        playDoneSound();
-        phase = 'done';
-        running = false;
-        clearInterval(timerInterval);
-        timerInterval = null;
+        playDoneSound(); phase = 'done'; running = false;
+        clearInterval(timerInterval); timerInterval = null;
         document.getElementById('btn-start').textContent = 'Done!';
         document.getElementById('btn-start').className = 'timer-btn reset';
         document.getElementById('timer-time').textContent = '🎉';
         document.getElementById('timer-label').textContent = 'All 3 rounds complete! Go claim your reward!';
         document.getElementById('timer-sublabel').textContent = sublabels.done;
-        highlightPhase();
-        return;
+        highlightPhase(); return;
       }
-      playBeep();
-      running = false;
-      clearInterval(timerInterval);
-      timerInterval = null;
-      phase = 'plan';
-      remaining = PLAN_SECS;
+      playBeep(); running = false;
+      clearInterval(timerInterval); timerInterval = null;
+      phase = 'plan'; remaining = PLAN_SECS;
       updateTimerDisplay();
       document.getElementById('btn-start').textContent = 'Start Round ' + currentRound;
       document.getElementById('btn-start').className = 'timer-btn start';
       return;
     }
   }
-  remaining--;
-  updateTimerDisplay();
+  remaining--; updateTimerDisplay();
 }
 
 function toggleTimer() {
   if (phase === 'done') return;
   if (running) {
-    running = false;
-    clearInterval(timerInterval);
-    timerInterval = null;
+    running = false; clearInterval(timerInterval); timerInterval = null;
     document.getElementById('btn-start').textContent = 'Resume';
     document.getElementById('btn-start').className = 'timer-btn start';
   } else {
@@ -956,116 +846,73 @@ function toggleTimer() {
 }
 
 function resetTimer() {
-  running = false;
-  clearInterval(timerInterval);
-  timerInterval = null;
-  phase = 'plan';
-  remaining = PLAN_SECS;
-  currentRound = 1;
-  renderRounds();
-  updateTimerDisplay();
+  running = false; clearInterval(timerInterval); timerInterval = null;
+  phase = 'plan'; remaining = PLAN_SECS; currentRound = 1;
+  renderRounds(); updateTimerDisplay();
   document.getElementById('btn-start').textContent = 'Start';
   document.getElementById('btn-start').className = 'timer-btn start';
   document.getElementById('timer-points-earned').style.display = 'none';
 }
-
 updateTimerDisplay();
 
-// --- Email Update ---
+// --- Email ---
 function buildEmailBody() {
   const name = document.getElementById('email-name').value.trim() || 'Student';
   const now = new Date();
   const dateStr = now.toLocaleDateString([], {weekday:'long', year:'numeric', month:'long', day:'numeric'});
-  const { totalPts, dayDetails } = calcPoints(sessions);
+  let body = `FOCUS FRAMEWORK — Weekly Update\nFrom: ${name}\nDate: ${dateStr}\n${'─'.repeat(40)}\n\n`;
 
-  let body = `FOCUS FRAMEWORK — Weekly Update\n`;
-  body += `From: ${name}\n`;
-  body += `Date: ${dateStr}\n`;
-  body += `${'─'.repeat(40)}\n\n`;
-
-  // Points
-  body += `⭐ FOCUS POINTS: ${totalPts} total\n`;
-  const sortedDays = Object.keys(dayDetails).sort().reverse().slice(0, 7);
+  body += `⭐ FOCUS POINTS: ${pointsData.totalPoints} total\n`;
+  const sortedDays = Object.keys(pointsData.history).sort().reverse().slice(0, 7);
   sortedDays.forEach(dk => {
-    const d = dayDetails[dk];
-    const bonusTxt = d.bonus > 0 ? ` (+${d.bonus} bonus/block)` : '';
-    body += `  ${dk}: ${d.count} blocks = ${d.dayPts} pts${bonusTxt}\n`;
+    const d = pointsData.history[dk];
+    const bonus = getBonusForCount(d.count);
+    const bonusTxt = bonus > 0 ? ` (+${bonus} bonus/block)` : '';
+    body += `  ${dk}: ${d.count} blocks = ${d.pts} pts${bonusTxt}\n`;
   });
   body += `\n`;
 
-  // Goals
-  body += `🎯 WEEKLY GOALS\n`;
-  body += `${'─'.repeat(40)}\n`;
-  if (goals.length === 0) {
-    body += `No goals set this week.\n`;
-  } else {
+  body += `🎯 WEEKLY GOALS\n${'─'.repeat(40)}\n`;
+  if (goals.length === 0) { body += `No goals set this week.\n`; }
+  else {
     const doneCount = goals.filter(g => g.done).length;
     body += `Progress: ${doneCount}/${goals.length} completed (${Math.round((doneCount/goals.length)*100)}%)\n\n`;
-    goals.forEach(g => {
-      body += `  ${g.done ? '✅' : '⬜'} ${g.text}\n`;
-    });
+    goals.forEach(g => { body += `  ${g.done ? '✅' : '⬜'} ${g.text}\n`; });
   }
-
   body += `\n`;
 
-  // Tracker
-  body += `📊 STUDY TRACKER\n`;
-  body += `${'─'.repeat(40)}\n`;
-  body += `Total blocks completed: ${sessions.length}\n`;
-  body += `Total focused time: ${sessions.length * 45} minutes (~${(sessions.length * 45 / 60).toFixed(1)} hours)\n\n`;
-
+  body += `📊 STUDY TRACKER\n${'─'.repeat(40)}\n`;
+  body += `Total blocks logged: ${sessions.length}\nTotal focused time: ${sessions.length * 45} minutes (~${(sessions.length * 45 / 60).toFixed(1)} hours)\n\n`;
   if (sessions.length > 0) {
-    const recent = sessions.slice(0, 10);
     body += `Recent sessions:\n`;
-    recent.forEach(s => {
-      body += `  ✅ ${s.name} — ${s.day} at ${s.time} (45 min)\n`;
-    });
-    if (sessions.length > 10) {
-      body += `  ... and ${sessions.length - 10} more sessions\n`;
-    }
-  } else {
-    body += `No sessions logged yet.\n`;
+    sessions.slice(0, 10).forEach(s => { body += `  ✅ ${s.name} — ${s.day} at ${s.time} (45 min)\n`; });
+    if (sessions.length > 10) body += `  ... and ${sessions.length - 10} more sessions\n`;
   }
 
-  body += `\n${'─'.repeat(40)}\n`;
-  body += `Sent from Focus Framework 🧠\n`;
-  body += `"Your brain is smarter than the content creator algorithm. Train it."`;
-
+  body += `\n${'─'.repeat(40)}\nSent from Focus Framework 🧠\n"Your brain is smarter than the content creator algorithm. Train it."`;
   return body;
 }
 
 function previewEmail() {
-  const body = buildEmailBody();
-  document.getElementById('email-preview').textContent = body;
+  document.getElementById('email-preview').textContent = buildEmailBody();
   document.getElementById('email-preview-wrap').style.display = 'block';
   document.getElementById('email-copied').style.display = 'none';
 }
-
 function sendEmail() {
   const to = document.getElementById('email-to').value.trim();
   const name = document.getElementById('email-name').value.trim() || 'Student';
-  const subject = `Focus Framework — Weekly Update from ${name}`;
-  const body = buildEmailBody();
-  const mailtoUrl = `mailto:${encodeURIComponent(to)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-  window.location.href = mailtoUrl;
+  window.location.href = `mailto:${encodeURIComponent(to)}?subject=${encodeURIComponent('Focus Framework — Weekly Update from ' + name)}&body=${encodeURIComponent(buildEmailBody())}`;
 }
-
 function copyEmail() {
   const body = buildEmailBody();
   navigator.clipboard.writeText(body).then(() => {
-    const el = document.getElementById('email-copied');
-    el.style.display = 'block';
-    setTimeout(() => { el.style.display = 'none'; }, 2000);
+    document.getElementById('email-copied').style.display = 'block';
+    setTimeout(() => { document.getElementById('email-copied').style.display = 'none'; }, 2000);
   }).catch(() => {
-    const ta = document.createElement('textarea');
-    ta.value = body;
-    document.body.appendChild(ta);
-    ta.select();
-    document.execCommand('copy');
-    document.body.removeChild(ta);
-    const el = document.getElementById('email-copied');
-    el.style.display = 'block';
-    setTimeout(() => { el.style.display = 'none'; }, 2000);
+    const ta = document.createElement('textarea'); ta.value = body;
+    document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
+    document.getElementById('email-copied').style.display = 'block';
+    setTimeout(() => { document.getElementById('email-copied').style.display = 'none'; }, 2000);
   });
 }
 </script>
