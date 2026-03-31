@@ -1,10 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Focus Framework - Study Guide</title>
- 
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   :root {
@@ -723,6 +723,7 @@ let remaining = PLAN_SECS;
 let phase = 'plan';
 let running = false;
 let currentRound = 1;
+let lastTickTime = null; // Wall-clock reference for accurate timing
 
 const sublabels = {
   plan: "Write down exactly what you'll tackle next.",
@@ -798,19 +799,35 @@ function playDoneSound() {
 }
 
 function tick() {
+  // Use wall-clock time to handle Chrome background tab throttling
+  const now = Date.now();
+  if (lastTickTime) {
+    const elapsed = Math.floor((now - lastTickTime) / 1000);
+    if (elapsed > 0) {
+      remaining -= elapsed;
+      lastTickTime = now;
+    } else {
+      return; // Less than 1 second passed
+    }
+  } else {
+    remaining--;
+    lastTickTime = now;
+  }
+
   if (remaining <= 0) {
+    remaining = 0;
     if (phase === 'plan') {
-      playBeep(); phase = 'focus'; remaining = FOCUS_SECS;
+      playBeep(); phase = 'focus'; remaining = FOCUS_SECS; lastTickTime = Date.now();
       updateTimerDisplay(); return;
     } else if (phase === 'focus') {
       autoLogBlock(); playBeep();
-      phase = 'break'; remaining = BREAK_SECS;
+      phase = 'break'; remaining = BREAK_SECS; lastTickTime = Date.now();
       updateTimerDisplay(); return;
     } else if (phase === 'break') {
       currentRound++; renderRounds();
       if (currentRound > TOTAL_ROUNDS) {
         playDoneSound(); phase = 'done'; running = false;
-        clearInterval(timerInterval); timerInterval = null;
+        clearInterval(timerInterval); timerInterval = null; lastTickTime = null;
         document.getElementById('btn-start').textContent = 'Done!';
         document.getElementById('btn-start').className = 'timer-btn reset';
         document.getElementById('timer-time').textContent = '🎉';
@@ -819,7 +836,7 @@ function tick() {
         highlightPhase(); return;
       }
       playBeep(); running = false;
-      clearInterval(timerInterval); timerInterval = null;
+      clearInterval(timerInterval); timerInterval = null; lastTickTime = null;
       phase = 'plan'; remaining = PLAN_SECS;
       updateTimerDisplay();
       document.getElementById('btn-start').textContent = 'Start Round ' + currentRound;
@@ -827,26 +844,27 @@ function tick() {
       return;
     }
   }
-  remaining--; updateTimerDisplay();
+  updateTimerDisplay();
 }
 
 function toggleTimer() {
   if (phase === 'done') return;
   if (running) {
-    running = false; clearInterval(timerInterval); timerInterval = null;
+    running = false; clearInterval(timerInterval); timerInterval = null; lastTickTime = null;
     document.getElementById('btn-start').textContent = 'Resume';
     document.getElementById('btn-start').className = 'timer-btn start';
   } else {
     running = true;
     document.getElementById('timer-points-earned').style.display = 'none';
-    timerInterval = setInterval(tick, 1000);
+    lastTickTime = Date.now();
+    timerInterval = setInterval(tick, 250);
     document.getElementById('btn-start').textContent = 'Pause';
     document.getElementById('btn-start').className = 'timer-btn pause';
   }
 }
 
 function resetTimer() {
-  running = false; clearInterval(timerInterval); timerInterval = null;
+  running = false; clearInterval(timerInterval); timerInterval = null; lastTickTime = null;
   phase = 'plan'; remaining = PLAN_SECS; currentRound = 1;
   renderRounds(); updateTimerDisplay();
   document.getElementById('btn-start').textContent = 'Start';
